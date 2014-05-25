@@ -7,13 +7,14 @@ Ora che iniziamo a parlare di queste cose vediamo il sito radice di [Puppet Labs
 
 ### Frammenti di codice e comandi
 
-```zsh
+```shell
 azure account download
 
 ```
 
-[azure account download][img/azure_account_download.png]
-[azure account import][img/azure_account_import.png]
+![azure account download][img1]
+
+![azure account import][img2]
 
 ## Bibliografia
 
@@ -21,4 +22,7 @@ azure account download
 
 
 [1]: http://puppetlabs.com/		"Puppet Labs"
+[img1]: https://raw.githubusercontent.com/giulianolatini/DevCamp2014/master/img/azure_account_download.png
+[img2]: https://raw.githubusercontent.com/giulianolatini/DevCamp2014/master/img/azure_account_import.png
+
 
