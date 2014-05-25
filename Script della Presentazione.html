@@ -150,11 +150,10 @@ git config --global user.email &quot;root@localhost.localnets&quot;
 git config -l
 
 mkdir /var/git
-git init --bare /var/git/localconf_etc
-git remote add origin /var/git/localconf_etc.git
+git init --bare /var/git/localconf_etc.git # I Repository bare per convenzione sono indicati .git
 </code></pre>
 
-<p><a href="http://git-scm.com/book/en/Git-on-the-Server-Generating-Your-SSH-Public-Key">ssh-keygen</a></p>
+<p>Con il comando, <a href="http://git-scm.com/book/en/Git-on-the-Server-Generating-Your-SSH-Public-Key">ssh-keygen</a> genero la coppia di chiavi rsa da utilizzare per le connessioni securizzate via ssh senza la necessità di digitare la password (nel caso in cui si voglia aggiungere automaticamente le chiavi nello store di security gestito dal <code>ssh-agent</code> lasciare vuota la richiesta della passphrase)</p>
 <pre><code class="txt">Generating public/private rsa key pair.
 Enter file in which to save the key (/root/.ssh/id_rsa):
 Enter passphrase (empty for no passphrase): 
@@ -177,12 +176,45 @@ The key's randomart image is:
 +-----------------+
 </code></pre>
 
-<p>da aggiungere al file <code>~/.bash_profile</code></p>
+<p>da aggiungere al file <code>~/.bash_profile</code> così che la chiave appena generata al login venga aggiunta automaticamente nello store gestito da ssh-agent per risolvere le problematiche di connessione securizzata senza la necessità di digitare password </p>
 <pre><code class="bash">if [ -z &quot;$SSH_AUTH_SOCK&quot; ] ; then
   eval `ssh-agent -s`
   ssh-add
 fi
 </code></pre>
 
+<p>Aggiungo la parte pubblica della chiave appena generata (<code>id_rsa.pub</code>) al db che openssh-server utilizza per ricavare le parti pubbliche utilizzate per decodificare la richiesta di connessione. Se la parte pubblica della propria chiave è presente, la decodifica della richiesta di accesso (codificata con la propria parte privata) ha successo, l'accesso alla shell è consentito senza la richiesta di password, l'esempio classico d'uso di questa modalità è lo scripting di attività da un sistema ad un altro remoto.</p>
+<pre><code class="code">cd ~/.ssh
+cat id_rsa.pub &gt;&gt; authorized_keys
+
+cd /etc
+git remote add origin root@localhost:/var/git/localconf_etc.git
+git add *
+etckeeper commit &quot;First Commit&quot;
+git push -u origin master
+</code></pre>
+
+<pre><code class="txt">Counting objects: 1658, done.
+Compressing objects: 100% (1282/1282), done.
+Writing objects: 100% (1658/1658), 902.11 KiB, done.
+Total 1658 (delta 85), reused 0 (delta 0)
+To root@localhost:/var/git/localconf_etc.git
+ * [new branch]      master -&gt; master
+Branch master set up to track remote branch master from origin.
+</code></pre>
+
+<p>Aggiungo il modulo puppet per gestire le infrastrutture in azure <a href="https://forge.puppetlabs.com/msopentech/windowsazure" title="msopentech/windowsazure">windowsazure#help</a>.</p>
+<pre><code class="code">puppet module install msopentech-windowsazure
+etckeeper commit &quot;Add Microsoft Azure Puppet module for manage&quot;
+</code></pre>
+
+<p>Step 4. Get the PE console user name.
+Run sudo grep ‘auth_user_email’ /etc/puppetlabs/installer/answers.install. Then, locate the user name in the answer file at this setting: q_puppet_enterpriseconsole_auth_user_email.
+The user name is admin@<VM name>.cloudapp.net. For example,admin@pe-demo.cloudapp.net.</p>
+<p>Step 5. Get the console password.
+Run sudo grep ‘auth_password’ /etc/puppetlabs/installer/database_info.install Locate the setting, q_puppet_enterpriseconsole_auth_password, which has the password appended to it.
+It looks similar to this: q_puppet_enterpriseconsole_auth_password=thos9Greu.
+Copy the password for use in step 6.</p>
+<p>pe-demo01.cloudapp.net</p>
 <h2 id="bibliografia">Bibliografia</h2>
 <p><a href="http://puppetlabs.com/" title="Puppet Labs">Puppet Labs</a>: Sito ufficiale.</p></body></html>

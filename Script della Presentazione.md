@@ -99,7 +99,24 @@ To root@localhost:/var/git/localconf_etc.git
 Branch master set up to track remote branch master from origin.
 ```
 
+Aggiungo il modulo puppet per gestire le infrastrutture in azure [windowsazure#help][PuppetForge#windowsazure].
 
+```code
+puppet module install msopentech-windowsazure
+etckeeper commit "Add Microsoft Azure Puppet module for manage"
+```
+
+
+Step 4. Get the PE console user name.
+Run sudo grep ‘auth_user_email’ /etc/puppetlabs/installer/answers.install. Then, locate the user name in the answer file at this setting: q_puppet_enterpriseconsole_auth_user_email.
+The user name is admin@<VM name>.cloudapp.net. For example,admin@pe-demo.cloudapp.net.
+
+Step 5. Get the console password.
+Run sudo grep ‘auth_password’ /etc/puppetlabs/installer/database_info.install Locate the setting, q_puppet_enterpriseconsole_auth_password, which has the password appended to it.
+It looks similar to this: q_puppet_enterpriseconsole_auth_password=thos9Greu.
+Copy the password for use in step 6.
+
+pe-demo01.cloudapp.net
 
 ## Bibliografia
 
@@ -108,6 +125,8 @@ Branch master set up to track remote branch master from origin.
 
 [Puppet#01]: http://puppetlabs.com/		"Puppet Labs"
 [PuppetForce#01]: https://forge.puppetlabs.com "Puppet Forge"
+[PuppetForge#windowsazure]: https://forge.puppetlabs.com/msopentech/windowsazure "msopentech/windowsazure"
+[Puppet&Azure#docs01]: http://info.puppetlabs.com/pe-azure-gsg.html
 [azure-cli#01]: https://raw.githubusercontent.com/giulianolatini/DevCamp2014/master/img/azure_account_download.png
 [azure-cli#02]: https://raw.githubusercontent.com/giulianolatini/DevCamp2014/master/img/azure_account_import.png
 [azure-cli#03]: https://raw.githubusercontent.com/giulianolatini/DevCamp2014/master/img/azure_vm_list.png
