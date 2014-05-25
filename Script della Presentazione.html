@@ -124,11 +124,65 @@ body{font-size:16px;}
 <h2 id="punti-da-sviluppare">Punti da sviluppare</h2>
 <p>Ora che iniziamo a parlare di queste cose vediamo il sito radice di <a href="http://puppetlabs.com/" title="Puppet Labs">Puppet Labs</a> che aiuta </p>
 <h3 id="frammenti-di-codice-e-comandi">Frammenti di codice e comandi</h3>
-<pre><code class="shell">azure account download
-
+<pre><code class="bash">azure account download
 </code></pre>
 
+<p>La procedura migliore per attivare il collegamento con il proprio account Microsoft Azure è procedere come segue:</p>
 <p><img alt="azure account download" src="https://raw.githubusercontent.com/giulianolatini/DevCamp2014/master/img/azure_account_download.png" /></p>
+<ul>
+<li>dal prompt digitare <code>azure account download</code> , verrà chiamato il browser standard di sistema che, risolta la fase di autenticazione tramite il servizio di accounting microsoft, provvederà a scaricare un file contenente le informazioni di connessione.</li>
+</ul>
 <p><img alt="azure account import" src="https://raw.githubusercontent.com/giulianolatini/DevCamp2014/master/img/azure_account_import.png" /></p>
+<ul>
+<li>tramite il comando <code>azure account import</code> importiamo nel sistema le informazioni necessarie a costruire il canale autenticato tra cui transiteranno i comandi verso il nostro account Microsoft Azure.</li>
+</ul>
+<p><img alt="azure vm list" src="https://raw.githubusercontent.com/giulianolatini/DevCamp2014/master/img/azure_vm_list.png" /></p>
+<p><img alt="azure vm start" src="https://raw.githubusercontent.com/giulianolatini/DevCamp2014/master/img/azure_vm_start.png" /></p>
+<h3 id="script-di-installazione">Script di installazione</h3>
+<pre><code class="code">apt-get install git etckeeper
+
+cd /etc
+git init
+vi /etc/etckeeper/etckeeper.conf
+
+git config --global user.name &quot;Administrator&quot;
+git config --global user.email &quot;root@localhost.localnets&quot;
+git config -l
+
+mkdir /var/git
+git init --bare /var/git/localconf_etc
+git remote add origin /var/git/localconf_etc.git
+</code></pre>
+
+<p><a href="http://git-scm.com/book/en/Git-on-the-Server-Generating-Your-SSH-Public-Key">ssh-keygen</a></p>
+<pre><code class="txt">Generating public/private rsa key pair.
+Enter file in which to save the key (/root/.ssh/id_rsa):
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again:
+Your identification has been saved in /root/.ssh/id_rsa.
+Your public key has been saved in /root/.ssh/id_rsa.pub.
+The key fingerprint is:
+bf:d5:8b:8b:48:f5:53:44:00:43:4f:33:7e:26:db:21 root@puppet-test01
+The key's randomart image is:
++--[ RSA 2048]----+
+|         .+.=..  |
+|           = +   |
+|            E =  |
+|             O . |
+|        S . . o  |
+|         o . o   |
+|        . . + .  |
+|       . . + o . |
+|        . o o..  |
++-----------------+
+</code></pre>
+
+<p>da aggiungere al file <code>~/.bash_profile</code></p>
+<pre><code class="bash">if [ -z &quot;$SSH_AUTH_SOCK&quot; ] ; then
+  eval `ssh-agent -s`
+  ssh-add
+fi
+</code></pre>
+
 <h2 id="bibliografia">Bibliografia</h2>
-<p><a href="http://puppetlabs.com/" title="Puppet Labs">Puppet Labs</a>: Sito di riferimento, con informazioni e note tecniche.</p></body></html>
+<p><a href="http://puppetlabs.com/" title="Puppet Labs">Puppet Labs</a>: Sito ufficiale.</p></body></html>
