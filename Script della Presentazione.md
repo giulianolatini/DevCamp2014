@@ -92,6 +92,7 @@ git add *
 etckeeper commit "First Commit"
 git push -u origin master
 ```
+
 ```txt
 Counting objects: 1658, done.
 Compressing objects: 100% (1282/1282), done.
