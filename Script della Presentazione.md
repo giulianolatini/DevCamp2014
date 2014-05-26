@@ -29,11 +29,14 @@ La procedura migliore per attivare il collegamento con il proprio account Micros
 ### Script di installazione
 
 ```code
+
+/usr/bin/puppet-init/puppet-enterprise-3.2.2-ubuntu-12.04-amd64/puppet-enterprise-installer
+
 apt-get install git etckeeper
 
 cd /etc
 git init
-vi /etc/etckeeper/etckeeper.conf
+vi /etc/etckeeper/etckeeper.conf #Modifico l'assegnazione della variabile VCS in VCS="git"
 
 git config --global user.name "Administrator"
 git config --global user.email "root@localhost.localnets"
