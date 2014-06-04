@@ -106,6 +106,14 @@ Branch master set up to track remote branch master from origin.
 
 ```code
 apt-get install vim-addon-manager vim-puppet vim-scripts
+apt-get install zsh
+vi /etc/passwd # Modifica della shell chiamata al login
+apt-get install curl
+curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+apt-get install git-flow
+apt-get install python-pip
+
+
 ```
 
 ```code
