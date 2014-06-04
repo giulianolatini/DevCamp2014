@@ -99,6 +99,11 @@ To root@localhost:/var/git/localconf_etc.git
 Branch master set up to track remote branch master from origin.
 ```
 
+```code
+apt-get install vim-addon-manager vim-puppet vim-scripts
+```
+
+
 Aggiungo il modulo puppet per gestire le infrastrutture in azure [windowsazure#help][PuppetForge#windowsazure].
 
 ```code
