@@ -112,6 +112,7 @@ apt-get install curl
 curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
 apt-get install git-flow
 apt-get install python-pip
+apt-get install exuberant-ctags
 
 
 ```
