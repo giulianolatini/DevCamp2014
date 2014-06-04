@@ -29,15 +29,19 @@ La procedura migliore per attivare il collegamento con il proprio account Micros
 ### Script di installazione
 
 ```code
+
+/usr/bin/puppet-init/puppet-enterprise-3.2.2-ubuntu-12.04-amd64/puppet-enterprise-installer
+
 apt-get install git etckeeper
 
 cd /etc
 git init
-vi /etc/etckeeper/etckeeper.conf
+vi /etc/etckeeper/etckeeper.conf #Modifico l'assegnazione della variabile VCS in VCS="git"
 
 git config --global user.name "Administrator"
 git config --global user.email "root@localhost.localnets"
 git config -l
+git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 
 mkdir /var/git
 git init --bare /var/git/localconf_etc.git # I Repository bare per convenzione sono indicati .git
@@ -89,6 +93,7 @@ git add *
 etckeeper commit "First Commit"
 git push -u origin master
 ```
+
 ```txt
 Counting objects: 1658, done.
 Compressing objects: 100% (1282/1282), done.
@@ -99,11 +104,19 @@ To root@localhost:/var/git/localconf_etc.git
 Branch master set up to track remote branch master from origin.
 ```
 
+<<<<<<< HEAD
 ```code
 apt-get install vim-addon-manager vim-puppet vim-scripts
 ```
 
 
+=======
+
+```code
+update_system='sudo apt-get update; sudo etckeeper commit "Aggiornamento Quotidiano"; sudo apt-get upgrade; sudo apt-get dist-upgrade; sudo apt-get check; sudo apt-get autoremove; sudo apt-get autoclean'
+```
+
+>>>>>>> 4bc8ed775d983cf8f5ea4fad5bc4579e7ef46adc
 Aggiungo il modulo puppet per gestire le infrastrutture in azure [windowsazure#help][PuppetForge#windowsazure].
 
 ```code
