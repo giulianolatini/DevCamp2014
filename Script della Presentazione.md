@@ -104,19 +104,15 @@ To root@localhost:/var/git/localconf_etc.git
 Branch master set up to track remote branch master from origin.
 ```
 
-<<<<<<< HEAD
 ```code
 apt-get install vim-addon-manager vim-puppet vim-scripts
 ```
-
-
-=======
 
 ```code
 update_system='sudo apt-get update; sudo etckeeper commit "Aggiornamento Quotidiano"; sudo apt-get upgrade; sudo apt-get dist-upgrade; sudo apt-get check; sudo apt-get autoremove; sudo apt-get autoclean'
 ```
 
->>>>>>> 4bc8ed775d983cf8f5ea4fad5bc4579e7ef46adc
+
 Aggiungo il modulo puppet per gestire le infrastrutture in azure [windowsazure#help][PuppetForge#windowsazure].
 
 ```code
