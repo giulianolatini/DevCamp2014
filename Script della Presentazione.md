@@ -28,7 +28,8 @@ La procedura migliore per attivare il collegamento con il proprio account Micros
 
 ### Script di installazione
 
-```code
+```bash
+sudo -i
 
 /usr/bin/puppet-init/puppet-enterprise-3.2.2-ubuntu-12.04-amd64/puppet-enterprise-installer
 
@@ -104,17 +105,22 @@ To root@localhost:/var/git/localconf_etc.git
 Branch master set up to track remote branch master from origin.
 ```
 
+Configurazione Generale
+
 ```bash
-apt-get install vim-addon-manager vim-puppet vim-scripts
-apt-get install zsh
+sudo apt-get install vim-addon-manager vim-puppet vim-scripts
+sudo apt-get install zsh
 vi /etc/passwd # Modifica della shell chiamata al login
-apt-get install curl
-curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
-apt-get install git-flow
-apt-get install python-pip
-apt-get install exuberant-ctags
-apt-get install byobu
+sudo apt-get install curl
+sudo curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+sudo apt-get install git-flow
+sudo apt-get install python-pip
+sudo apt-get install exuberant-ctags
+sudo pip install --user git+git://github.com/Lokaltog/powerline
+sudo apt-get install byobu
 ```
+
+Configurazione di ViM
 
 ```vim
 set nu!
@@ -143,6 +149,41 @@ set termencoding=utf-8
 update_system='sudo apt-get update; sudo etckeeper commit "Aggiornamento Quotidiano"; sudo apt-get upgrade; sudo apt-get dist-upgrade; sudo apt-get check; sudo apt-get autoremove; sudo apt-get autoclean'
 ```
 
+Configurazione base per un cloud-service [OpenCPU] su Ubuntu 14.04 LTS
+
+```bash
+sudo apt-get install software-properties-common
+sudo add-apt-repository ppa:opencpu/opencpu-1.4
+sudo apt-get update
+sudo apt-get install opencpu  
+```
+
+Configurazione servizio di Voting On-line [HELIOS]
+
+```bash
+apt-get install postgresql
+apt-get install python-psycopg2
+apt-get install python-django
+su - postgres
+createuser --superuser <$whoami>
+exit
+cd /usr/local/share
+git clone --recursive git://github.com/benadida/helios-server.git
+git clone http://github.com/openid/python-openid
+cd python-openid
+sudo python setup.py install
+apt-get install python-setuptools
+easy_install south
+apt-get install rabbitmq-server
+easy_install celery
+easy_install django-celery
+apt-get install python-virtualenv
+cd /usr/local/share/helios-server
+virtualenv venv
+source venv/bin/activate
+pip install -r requirements.txt
+
+```
 
 Aggiungo il modulo puppet per gestire le infrastrutture in azure [windowsazure#help][PuppetForge#windowsazure].
 
@@ -181,4 +222,6 @@ pe-demo01.cloudapp.net
 [azure-cli#joinaccount]: http://azure.microsoft.com/en-us/documentation/articles/xplat-cli/#configure
 [azure-cli#use]: http://azure.microsoft.com/en-us/documentation/articles/xplat-cli/#use
 [git-scm.com#ssh-keygen]:http://git-scm.com/book/en/Git-on-the-Server-Generating-Your-SSH-Public-Key
+[OpenCPU]: https://www.opencpu.org/
+[HELIOS]: http://documentation.heliosvoting.org/
 
