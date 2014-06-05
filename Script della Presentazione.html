@@ -139,15 +139,20 @@ body{font-size:16px;}
 <p><img alt="azure vm list" src="https://raw.githubusercontent.com/giulianolatini/DevCamp2014/master/img/azure_vm_list.png" /></p>
 <p><img alt="azure vm start" src="https://raw.githubusercontent.com/giulianolatini/DevCamp2014/master/img/azure_vm_start.png" /></p>
 <h3 id="script-di-installazione">Script di installazione</h3>
-<pre><code class="code">apt-get install git etckeeper
+<pre><code class="bash">sudo -i
+
+/usr/bin/puppet-init/puppet-enterprise-3.2.2-ubuntu-12.04-amd64/puppet-enterprise-installer
+
+apt-get install git etckeeper
 
 cd /etc
 git init
-vi /etc/etckeeper/etckeeper.conf
+vi /etc/etckeeper/etckeeper.conf #Modifico l'assegnazione della variabile VCS in VCS=&quot;git&quot;
 
 git config --global user.name &quot;Administrator&quot;
 git config --global user.email &quot;root@localhost.localnets&quot;
 git config -l
+git config --global alias.lg &quot;log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset' --abbrev-commit&quot;
 
 mkdir /var/git
 git init --bare /var/git/localconf_etc.git # I Repository bare per convenzione sono indicati .git
@@ -184,7 +189,7 @@ fi
 </code></pre>
 
 <p>Aggiungo la parte pubblica della chiave appena generata (<code>id_rsa.pub</code>) al db che openssh-server utilizza per ricavare le parti pubbliche utilizzate per decodificare la richiesta di connessione. Se la parte pubblica della propria chiave è presente, la decodifica della richiesta di accesso (codificata con la propria parte privata) ha successo, l'accesso alla shell è consentito senza la richiesta di password, l'esempio classico d'uso di questa modalità è lo scripting di attività da un sistema ad un altro remoto.</p>
-<pre><code class="code">cd ~/.ssh
+<pre><code class="bash">cd ~/.ssh
 cat id_rsa.pub &gt;&gt; authorized_keys
 
 cd /etc
@@ -203,8 +208,80 @@ To root@localhost:/var/git/localconf_etc.git
 Branch master set up to track remote branch master from origin.
 </code></pre>
 
+<p>Configurazione Generale</p>
+<pre><code class="bash">sudo apt-get install vim-addon-manager vim-puppet vim-scripts
+sudo apt-get install zsh
+vi /etc/passwd # Modifica della shell chiamata al login
+sudo apt-get install curl
+sudo curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+sudo apt-get install git-flow
+sudo apt-get install python-pip
+sudo apt-get install exuberant-ctags
+sudo pip install --user git+git://github.com/Lokaltog/powerline
+sudo apt-get install byobu
+</code></pre>
+
+<p>Configurazione di ViM</p>
+<pre><code class="vim">set nu!
+set runtimepath=~/.vim-scripts,/usr/share/vim-scripts,$VIMRUNTIME
+autocmd FileType html setlocal shiftwidth=2 tabstop=2
+autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4
+autocmd FileType css setlocal expandtab shiftwidth=2 softtabstop=2
+set tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
+set paste
+let mapleader = &quot;,&quot;
+set laststatus=2
+set statusline=%{GitBranch()}
+python from powerline.vim import setup as powerline_setup
+python powerline_setup()
+python del powerline_setup
+set rtp+=~/.powerline/powerline/bindings/vim
+let g:Powerline_symbols = 'fancy'
+set encoding=utf-8
+set t_Co=256
+set fillchars+=stl:\ ,stlnc:\
+set term=xterm-256color
+set termencoding=utf-8
+</code></pre>
+
+<pre><code class="bash">update_system='sudo apt-get update; sudo etckeeper commit &quot;Aggiornamento Quotidiano&quot;; sudo apt-get upgrade; sudo apt-get dist-upgrade; sudo apt-get check; sudo apt-get autoremove; sudo apt-get autoclean'
+</code></pre>
+
+<p>Configurazione base per un cloud-service <a href="https://www.opencpu.org/">OpenCPU</a> su Ubuntu 14.04 LTS</p>
+<pre><code class="bash">sudo apt-get install software-properties-common
+sudo add-apt-repository ppa:opencpu/opencpu-1.4
+sudo apt-get update
+sudo apt-get install opencpu  
+</code></pre>
+
+<p>Configurazione servizio di Voting On-line <a href="http://documentation.heliosvoting.org/">HELIOS</a></p>
+<pre><code class="bash">apt-get install postgresql
+apt-get install python-psycopg2
+apt-get install python-django
+su - postgres
+createuser --superuser &lt;$whoami&gt;
+exit
+cd /usr/local/share
+git clone --recursive git://github.com/benadida/helios-server.git
+git clone http://github.com/openid/python-openid
+cd python-openid
+sudo python setup.py install
+apt-get install python-setuptools
+easy_install south
+apt-get install rabbitmq-server
+easy_install celery
+easy_install django-celery
+apt-get install python-virtualenv
+cd /usr/local/share/helios-server
+virtualenv venv
+source venv/bin/activate
+apt-get install postgresql-server-dev-all
+pip install -r requirements.txt
+
+</code></pre>
+
 <p>Aggiungo il modulo puppet per gestire le infrastrutture in azure <a href="https://forge.puppetlabs.com/msopentech/windowsazure" title="msopentech/windowsazure">windowsazure#help</a>.</p>
-<pre><code class="code">puppet module install msopentech-windowsazure
+<pre><code class="bash">puppet module install msopentech-windowsazure
 etckeeper commit &quot;Add Microsoft Azure Puppet module for manage&quot;
 </code></pre>
 

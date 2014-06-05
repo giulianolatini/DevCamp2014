@@ -181,6 +181,7 @@ apt-get install python-virtualenv
 cd /usr/local/share/helios-server
 virtualenv venv
 source venv/bin/activate
+apt-get install postgresql-server-dev-all
 pip install -r requirements.txt
 
 ```
