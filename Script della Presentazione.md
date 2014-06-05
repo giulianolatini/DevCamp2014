@@ -83,7 +83,7 @@ fi
 
 Aggiungo la parte pubblica della chiave appena generata (`id_rsa.pub`) al db che openssh-server utilizza per ricavare le parti pubbliche utilizzate per decodificare la richiesta di connessione. Se la parte pubblica della propria chiave è presente, la decodifica della richiesta di accesso (codificata con la propria parte privata) ha successo, l'accesso alla shell è consentito senza la richiesta di password, l'esempio classico d'uso di questa modalità è lo scripting di attività da un sistema ad un altro remoto.
 
-```code
+```bash
 cd ~/.ssh
 cat id_rsa.pub >> authorized_keys
 
@@ -104,7 +104,7 @@ To root@localhost:/var/git/localconf_etc.git
 Branch master set up to track remote branch master from origin.
 ```
 
-```code
+```bash
 apt-get install vim-addon-manager vim-puppet vim-scripts
 apt-get install zsh
 vi /etc/passwd # Modifica della shell chiamata al login
@@ -139,14 +139,14 @@ set term=xterm-256color
 set termencoding=utf-8
 ```
 
-```code
+```bash
 update_system='sudo apt-get update; sudo etckeeper commit "Aggiornamento Quotidiano"; sudo apt-get upgrade; sudo apt-get dist-upgrade; sudo apt-get check; sudo apt-get autoremove; sudo apt-get autoclean'
 ```
 
 
 Aggiungo il modulo puppet per gestire le infrastrutture in azure [windowsazure#help][PuppetForge#windowsazure].
 
-```code
+```bash
 puppet module install msopentech-windowsazure
 etckeeper commit "Add Microsoft Azure Puppet module for manage"
 ```
