@@ -113,8 +113,30 @@ curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | 
 apt-get install git-flow
 apt-get install python-pip
 apt-get install exuberant-ctags
+apt-get install byobu
+```
 
-
+```vim
+set nu!
+set runtimepath=~/.vim-scripts,/usr/share/vim-scripts,$VIMRUNTIME
+autocmd FileType html setlocal shiftwidth=2 tabstop=2
+autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4
+autocmd FileType css setlocal expandtab shiftwidth=2 softtabstop=2
+set tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
+set paste
+let mapleader = ","
+set laststatus=2
+set statusline=%{GitBranch()}
+python from powerline.vim import setup as powerline_setup
+python powerline_setup()
+python del powerline_setup
+set rtp+=~/.powerline/powerline/bindings/vim
+let g:Powerline_symbols = 'fancy'
+set encoding=utf-8
+set t_Co=256
+set fillchars+=stl:\ ,stlnc:\
+set term=xterm-256color
+set termencoding=utf-8
 ```
 
 ```code
