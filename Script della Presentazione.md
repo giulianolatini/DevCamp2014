@@ -110,7 +110,7 @@ Configurazione Generale
 ```bash
 sudo apt-get install vim-addon-manager vim-puppet vim-scripts
 sudo apt-get install zsh
-sudo chsh -s /bin/zsh # Modifica della shell chiamata al login
+sudo chsh -s $(which zsh) # Modifica della shell chiamata al login
 sudo apt-get install curl
 sudo curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
 sudo apt-get install git-flow
