@@ -20,7 +20,33 @@ La procedura migliore per attivare il collegamento con il proprio account Micros
 
 * tramite il comando `azure account import` importiamo nel sistema le informazioni necessarie a costruire il canale autenticato tra cui transiteranno i comandi verso il nostro account Microsoft Azure.
 
+* tramite il comando `azure vm image list` vediamo l'elenco delle immagini disponibili nello store per applicarlo al comando di deploy
+* b39f27a8b8c64d52b05eac6a62ebad85__Ubuntu-14_04-LTS-amd64-server-20140618.1-en-us-30GB
+```bash
+openssl req -x509 -nodes -days 365 \
+-newkey rsa:2048 \
+-keyout test-pp02.key \
+-out test-pp02.pem
 
+mv test-pp02.key ~/.ssh
+chmod a-rwx,u+rw ~/.ssh/test-pp02.key
+ssh-add ~/.ssh/test-pp02.key
+
+azure vm create test-pp02.cloudapp.net b39f27a8b8c64d52b05eac6a62ebad85__Ubuntu-14_04-LTS-amd64-server-20140618.1-en-us-30GB wolf --location "North Europe" -z small -e 22 -t test-pp02.pem -P
+
+ssh -p 22 wolf@test-pp02.cloudapp.net -c blowfish -C -X #Connessione ed apertura shell come utente wolf
+
+sudo puppet module install thomasvandoren-etckeeper
+sudo puppet module install thomasvandoren-etckeeper
+sudo puppet module install jpadams-puppet_vim_env
+sudo puppet module install acme/ohmyzsh
+sudo puppet module install stankevich-python
+sudo puppet module install puppetlabs-apache
+sudo puppet module install puppetlabs-mysql
+sudo puppet module install example42-php
+
+azure vm shutdown test-pp02 # spengo la vm test-pp02
+```
 
 ![azure vm list][azure-cli#03]
 
@@ -124,10 +150,10 @@ Configurazione di ViM
 
 ```vim
 set nu!
-set runtimepath=~/.vim-scripts,/usr/share/vim-scripts,$VIMRUNTIME
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
 autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4
 autocmd FileType css setlocal expandtab shiftwidth=2 softtabstop=2
+autocmd FileType puppet setlocal expandtab shiftwidth=2 softtabstop=2
 set tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
 set paste
 let mapleader = ","
@@ -191,6 +217,8 @@ Aggiungo il modulo puppet per gestire le infrastrutture in azure [windowsazure#h
 ```bash
 puppet module install msopentech-windowsazure
 etckeeper commit "Add Microsoft Azure Puppet module for manage"
+
+
 ```
 
 

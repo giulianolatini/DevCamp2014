@@ -134,8 +134,39 @@ body{font-size:16px;}
 </ul>
 <p><img alt="azure account import" src="https://raw.githubusercontent.com/giulianolatini/DevCamp2014/master/img/azure_account_import.png" /></p>
 <ul>
-<li>tramite il comando <code>azure account import</code> importiamo nel sistema le informazioni necessarie a costruire il canale autenticato tra cui transiteranno i comandi verso il nostro account Microsoft Azure.</li>
+<li>
+<p>tramite il comando <code>azure account import</code> importiamo nel sistema le informazioni necessarie a costruire il canale autenticato tra cui transiteranno i comandi verso il nostro account Microsoft Azure.</p>
+</li>
+<li>
+<p>tramite il comando <code>azure vm image list</code> vediamo l'elenco delle immagini disponibili nello store per applicarlo al comando di deploy</p>
+</li>
+<li>b39f27a8b8c64d52b05eac6a62ebad85__Ubuntu-14_04-LTS-amd64-server-20140618.1-en-us-30GB</li>
 </ul>
+<pre><code class="bash">openssl req -x509 -nodes -days 365 \
+-newkey rsa:2048 \
+-keyout test-pp02.key \
+-out test-pp02.pem
+
+mv test-pp02.key ~/.ssh
+chmod a-rwx,u+rw ~/.ssh/test-pp02.key
+ssh-add ~/.ssh/test-pp02.key
+
+azure vm create test-pp02.cloudapp.net b39f27a8b8c64d52b05eac6a62ebad85__Ubuntu-14_04-LTS-amd64-server-20140618.1-en-us-30GB wolf --location &quot;North Europe&quot; -z small -e 22 -t test-pp02.pem -P
+
+ssh -p 22 wolf@test-pp02.cloudapp.net -c blowfish -C -X #Connessione ed apertura shell come utente wolf
+
+sudo puppet module install thomasvandoren-etckeeper
+sudo puppet module install thomasvandoren-etckeeper
+sudo puppet module install jpadams-puppet_vim_env
+sudo puppet module install acme/ohmyzsh
+sudo puppet module install stankevich-python
+sudo puppet module install puppetlabs-apache
+sudo puppet module install puppetlabs-mysql
+sudo puppet module install example42-php
+
+azure vm shutdown test-pp02 # spengo la vm test-pp02
+</code></pre>
+
 <p><img alt="azure vm list" src="https://raw.githubusercontent.com/giulianolatini/DevCamp2014/master/img/azure_vm_list.png" /></p>
 <p><img alt="azure vm start" src="https://raw.githubusercontent.com/giulianolatini/DevCamp2014/master/img/azure_vm_start.png" /></p>
 <h3 id="script-di-installazione">Script di installazione</h3>
@@ -223,10 +254,10 @@ sudo apt-get install byobu
 
 <p>Configurazione di ViM</p>
 <pre><code class="vim">set nu!
-set runtimepath=~/.vim-scripts,/usr/share/vim-scripts,$VIMRUNTIME
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
 autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4
 autocmd FileType css setlocal expandtab shiftwidth=2 softtabstop=2
+autocmd FileType puppet setlocal expandtab shiftwidth=2 softtabstop=2
 set tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
 set paste
 let mapleader = &quot;,&quot;
@@ -283,6 +314,8 @@ pip install -r requirements.txt
 <p>Aggiungo il modulo puppet per gestire le infrastrutture in azure <a href="https://forge.puppetlabs.com/msopentech/windowsazure" title="msopentech/windowsazure">windowsazure#help</a>.</p>
 <pre><code class="bash">puppet module install msopentech-windowsazure
 etckeeper commit &quot;Add Microsoft Azure Puppet module for manage&quot;
+
+
 </code></pre>
 
 <p>Step 4. Get the PE console user name.
