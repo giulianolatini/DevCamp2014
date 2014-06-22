@@ -1,0 +1,17 @@
+Sun Jun 22 2014 11:22:48 GMT+0200 (CEST):
+{ [Error: ENOENT, no such file or directory 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDckR1cMCBPTZdThx1R90SVAb2D8jvKAaVYkcE6YxFOU67n/Dh/06zrocZg8In1iezLr7qHuI8qtZeUlFurQsfdf2OGVCKj4U/1OewGSdyZjWJLTdASq+tBoAQTLzPdViQw8ADuZ5vaugdz9ozDXmXqn4aqzQWONBbeFWIDDAhq9o/Ot4LPUDF9MapzuFe25BG05xHqTuGcBniPfsMVjwKSP9uBAaCQ+8bVbichRK2wGWB/0eERJ5yD9C+LPtfD9kR79Kl1Hf3shmnGz5MOx0JZMzEMgR5GEXLyzFwKYGJsBi0warnPQpOxhm0gvbFxLOaw6ThT3w20kbHCEgZmVfGf wolf@macretigiuliano.fritz.box']
+  errno: 34,
+  code: 'ENOENT',
+  path: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDckR1cMCBPTZdThx1R90SVAb2D8jvKAaVYkcE6YxFOU67n/Dh/06zrocZg8In1iezLr7qHuI8qtZeUlFurQsfdf2OGVCKj4U/1OewGSdyZjWJLTdASq+tBoAQTLzPdViQw8ADuZ5vaugdz9ozDXmXqn4aqzQWONBbeFWIDDAhq9o/Ot4LPUDF9MapzuFe25BG05xHqTuGcBniPfsMVjwKSP9uBAaCQ+8bVbichRK2wGWB/0eERJ5yD9C+LPtfD9kR79Kl1Hf3shmnGz5MOx0JZMzEMgR5GEXLyzFwKYGJsBi0warnPQpOxhm0gvbFxLOaw6ThT3w20kbHCEgZmVfGf wolf@macretigiuliano.fritz.box',
+  syscall: 'open' }
+Error: ENOENT, no such file or directory 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDckR1cMCBPTZdThx1R90SVAb2D8jvKAaVYkcE6YxFOU67n/Dh/06zrocZg8In1iezLr7qHuI8qtZeUlFurQsfdf2OGVCKj4U/1OewGSdyZjWJLTdASq+tBoAQTLzPdViQw8ADuZ5vaugdz9ozDXmXqn4aqzQWONBbeFWIDDAhq9o/Ot4LPUDF9MapzuFe25BG05xHqTuGcBniPfsMVjwKSP9uBAaCQ+8bVbichRK2wGWB/0eERJ5yD9C+LPtfD9kR79Kl1Hf3shmnGz5MOx0JZMzEMgR5GEXLyzFwKYGJsBi0warnPQpOxhm0gvbFxLOaw6ThT3w20kbHCEgZmVfGf wolf@macretigiuliano.fritz.box'
+    at Object.fs.openSync (fs.js:427:18)
+    at Object.fs.readFileSync (fs.js:284:15)
+    at loadSshCert (/opt/local/lib/node_modules/azure-cli/lib/commands/asm/vm._js:791:23)
+    at verifyCertFingerPrint (/opt/local/lib/node_modules/azure-cli/lib/commands/asm/vm._js:918:30)
+    at /opt/local/lib/node_modules/azure-cli/lib/commands/asm/vm._js:990:28
+    at verifyUserNameAndPwd (/opt/local/lib/node_modules/azure-cli/lib/commands/asm/vm._js:905:18)
+    at /opt/local/lib/node_modules/azure-cli/lib/commands/asm/vm._js:985:11
+    at /opt/local/lib/node_modules/azure-cli/lib/commands/asm/vm._js:824:16
+    at callback_ (/opt/local/lib/node_modules/azure-cli/lib/util/utils.js:197:9)
+    at finalCallback (/opt/local/lib/node_modules/azure-cli/node_modules/azure/node_modules/azure-mgmt/lib/servicemanagementservice.js:492:7)
