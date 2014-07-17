@@ -171,6 +171,46 @@ set term=xterm-256color
 set termencoding=utf-8
 ```
 
+Configurazione ViM Estesa 
+```vim
+execute pathogen#infect('stuff/{}')
+call pathogen#infect()
+
+syntax on
+filetype plugin indent on
+
+let g:syntastic_always_populate_loc_list=1
+
+"To enable Just puppet-lint and disable the parser uncomment next line
+let g:syntastic_puppet_checkers=['puppetlint']
+let g:Powerline_symbols = 'unicode'
+let g:Powerline_theme="skwp"
+let g:Powerline_colorscheme="skwp"
+let g:Powerline_symbols = 'fancy'
+
+set rtp+=.powerline/powerline/bindings/vim
+
+set background=dark
+set laststatus=2
+set encoding=utf-8
+set fillchars+=stl:\ ,stlnc:\
+
+set term=xterm-256color
+set termencoding=utf-8
+set t_Co=256
+
+set nu!
+autocmd FileType html setlocal shiftwidth=2 tabstop=2
+autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4
+autocmd FileType css setlocal expandtab shiftwidth=2 softtabstop=2
+autocmd FileType puppet setlocal expandtab shiftwidth=2 softtabstop=2
+set tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
+set paste
+let mapleader = ","
+set laststatus=2
+set statusline=%{GitBranch()}
+```
+
 ```bash
 update_system='sudo apt-get update; sudo etckeeper commit "Aggiornamento Quotidiano"; sudo apt-get upgrade; sudo apt-get dist-upgrade; sudo apt-get check; sudo apt-get autoremove; sudo apt-get autoclean'
 ```
