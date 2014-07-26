@@ -108,6 +108,19 @@ if [ -z "$SSH_AUTH_SOCK" ] ; then
 fi
 ```
 
+```zsh
+# add the ssh-agent plugin to `plugins` variables to load ssh-agent oh-my-zsh support
+plugins=(ssh-agent ... )
+#  enable and load ssh-agent identities
+zstyle :omz:plugins:ssh-agent identities id_rsa latini.giuliano@gmail.com
+# @end-of-script adding openssh-RSA keys
+export SSH_KEYS_PATH="/Users/wolf/.ssh"
+ssh-add $SSH_KEYS_PATH/test-pp02.key
+ssh-add $SSH_KEYS_PATH/test-pp03.key
+```
+
+
+
 Aggiungo la parte pubblica della chiave appena generata (`id_rsa.pub`) al db che openssh-server utilizza per ricavare le parti pubbliche utilizzate per decodificare la richiesta di connessione. Se la parte pubblica della propria chiave è presente, la decodifica della richiesta di accesso (codificata con la propria parte privata) ha successo, l'accesso alla shell è consentito senza la richiesta di password, l'esempio classico d'uso di questa modalità è lo scripting di attività da un sistema ad un altro remoto.
 
 ```bash
