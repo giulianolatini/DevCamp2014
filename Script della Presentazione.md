@@ -108,7 +108,7 @@ if [ -z "$SSH_AUTH_SOCK" ] ; then
 fi
 ```
 
-```zsh
+```bash
 # add the ssh-agent plugin to `plugins` variables to load ssh-agent oh-my-zsh support
 plugins=(ssh-agent ... )
 #  enable and load ssh-agent identities
@@ -119,7 +119,7 @@ ssh-add $SSH_KEYS_PATH/test-pp02.key
 ssh-add $SSH_KEYS_PATH/test-pp03.key
 ```
 Configurazione Avanzata di .zshrc
-```zsh
+```bash
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
