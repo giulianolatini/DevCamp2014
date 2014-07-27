@@ -118,7 +118,117 @@ export SSH_KEYS_PATH="/Users/wolf/.ssh"
 ssh-add $SSH_KEYS_PATH/test-pp02.key
 ssh-add $SSH_KEYS_PATH/test-pp03.key
 ```
+Configurazione Avanzata di .zshrc
+```zsh
+# Path to your oh-my-zsh configuration.
+ZSH=$HOME/.oh-my-zsh
 
+# Set name of the theme to load.
+# Look in ~/.oh-my-zsh/themes/
+# Optionally, if you set this to "random", it'll load a random theme each
+# time that oh-my-zsh is loaded.
+ZSH_THEME="ducknorris"
+
+POWERLINE_HIDE_HOST_NAME=" "
+POWERLINE_DETECT_SSH="true"
+POWERLINE_GIT_CLEAN="✔"
+POWERLINE_GIT_DIRTY="✘"
+POWERLINE_GIT_ADDED="%F{green}✚%F{black}"
+POWERLINE_GIT_MODIFIED="%F{blue}✹%F{black}"
+POWERLINE_GIT_DELETED="%F{red}✖%F{black}"
+POWERLINE_GIT_UNTRACKED="%F{yellow}✭%F{black}"
+POWERLINE_GIT_RENAMED="➜"
+POWERLINE_GIT_UNMERGED="═"
+
+# Example aliases
+alias zshconfig="mate ~/.zshrc"
+alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# Set to this to use case-sensitive completion
+CASE_SENSITIVE="true"
+
+# Uncomment this to disable bi-weekly auto-update checks
+# DISABLE_AUTO_UPDATE="true"
+
+# Uncomment to change how often before auto-updates occur? (in days)
+# export UPDATE_ZSH_DAYS=13
+
+# Uncomment following line if you want to disable colors in ls
+# DISABLE_LS_COLORS="true"
+
+# Uncomment following line if you want to disable autosetting terminal title.
+# DISABLE_AUTO_TITLE="true"
+
+# Uncomment following line if you want to disable command autocorrection
+# DISABLE_CORRECTION="true"
+
+# Uncomment following line if you want red dots to be displayed while waiting for completion
+# COMPLETION_WAITING_DOTS="true"
+
+# Uncomment following line if you want to disable marking untracked files under
+# VCS as dirty. This makes repository status check for large repositories much,
+# much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# Uncomment following line if you want to  shown in the command execution time stamp 
+# in the history command output. The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|
+# yyyy-mm-dd
+HIST_STAMPS="dd/mm/yyyy"
+
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+plugins=(git ssh-agent git-flow git-remote-branch github osx sublime sudo rsync python npm node macports zsh-syntax-highlighting)
+
+# User configuration
+# The next configuration path for go language
+export GOROOT="/usr/local/go"
+export GOPATH="/Users/wolf/Sviluppo/go"
+
+export PATH=$GOPATH/bin:$GOROOT/bin:$HOME/bin:/opt/local/bin:/usr/local/bin:/opt/local/bin:$PATH
+
+# export MANPATH="/usr/local/man:$MANPATH"
+
+# # Preferred editor for local and remote sessions
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='mvim'
+fi
+
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
+
+#  enable and load ssh-agent identities
+zstyle :omz:plugins:ssh-agent identities id_rsa latini.giuliano@gmail.com
+
+# Setup Powerline
+. ~/.powerline/powerline/bindings/zsh/powerline.zsh
+
+# Setup Google Develop SDK
+export FPATH="/Users/wolf/.oh-my-zsh/custom/plugins/gcloud-zsh-completion/src/:$FPATH"
+autoload -U compinit compdef
+compinit
+# The next line updates PATH for the Google Cloud SDK.
+. ~/google-cloud-sdk/path.zsh.inc
+# The next line enables bash completion for gcloud.
+. ~/google-cloud-sdk/completion.zsh.inc
+
+# Setup oh-my-zsh
+source $ZSH/oh-my-zsh.sh
+
+if [ -f ~/.zsh/zshalias ]; then
+    source ~/.zsh/zshalias
+else
+    print "404: ~/.zsh/zshalias not found."
+fi
+
+# ssh adding others keys
+export SSH_KEYS_PATH="/Users/wolf/.ssh"
+ssh-add $SSH_KEYS_PATH/test-pp02.key
+ssh-add $SSH_KEYS_PATH/test-pp03.key
+
+```
 
 
 Aggiungo la parte pubblica della chiave appena generata (`id_rsa.pub`) al db che openssh-server utilizza per ricavare le parti pubbliche utilizzate per decodificare la richiesta di connessione. Se la parte pubblica della propria chiave è presente, la decodifica della richiesta di accesso (codificata con la propria parte privata) ha successo, l'accesso alla shell è consentito senza la richiesta di password, l'esempio classico d'uso di questa modalità è lo scripting di attività da un sistema ad un altro remoto.
