@@ -224,6 +224,191 @@ set laststatus=2
 set statusline=%{GitBranch()}
 ```
 
+Configurazione ViM Estesa per sviluppo software (lingiaggi supportati: Puppet, Google Go, Python)
+```vim
+execute pathogen#infect('stuff/{}')
+call pathogen#infect()
+
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+Plugin 'tpope/vim-fugitive'
+" plugin from http://vim-scripts.org/vim/scripts.html
+Plugin 'L9'
+" Git plugin not hosted on GitHub
+Plugin 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (i.e. when working on your own plugin)
+"Plugin 'file:///home/gmarik/path/to/plugin'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Avoid a name conflict with L9
+"Plugin 'user/L9', {'name': 'newL9'}
+" Adding YouCompleteMe plugin
+Plugin 'Valloric/YouCompleteMe'
+" Track the engine.
+Plugin 'SirVer/ultisnips'
+" Snippets are separated from the engine. Add this if you want them:
+Plugin 'honza/vim-snippets'
+" Adding Color Themes
+Plugin 'flazz/vim-colorschemes'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+"filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
+syntax on
+filetype plugin indent on
+
+" GUI setting font case for [GTK2, Photon, KDE, X11]
+if has("gui_running")
+  if has("gui_gtk2")
+    set guifont=Courier\ New\ 11
+  elseif has("gui_photon")
+    set guifont=Courier\ New:s11
+  elseif has("gui_kde")
+    set guifont=Courier\ New/11/-1/5/50/0/0/0/1/0
+  elseif has("x11")
+    set guifont=-*-courier-medium-r-normal-*-*-180-*-*-m-*-*
+  else
+"    set guifont=Courier_New:h11:cDEFAULT
+	set guifont=Inconsolata\ for\ PowerLine:h16
+  endif
+endif
+
+" Setting colorscheme and coursorline feauture
+"colorscheme zenburn
+"let g:zenburn_force_dark_Background=1
+
+let g:molokai_original = 1
+let g:rehash256 = 1
+
+" Autostart NERDTreeToggle
+au VimEnter * NERDTreeToggle
+" Autoclose NERDTreeToggle when is only window opened
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+" Mapping filetype markdown to *.md
+au BufRead,BufNewFile *.md set filetype=markdown
+
+" Map leader keyword to - key
+let mapleader = ","
+
+" Enable/Disable (using \c keys sequence) cross-indicator to identified row&column where is cursor
+hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+nnoremap <Leader>c :set cursorline! cursorcolumn!<CR>
+
+augroup CursorLine
+  au!
+  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  au WinLeave * setlocal nocursorline
+augroup END
+
+let g:syntastic_always_populate_loc_list=1
+
+"To enable Just puppet-lint and disable the parser uncomment next line
+let g:syntastic_puppet_checkers=['puppetlint']
+let g:Powerline_symbols = 'unicode'
+let g:Powerline_theme="skwp"
+let g:Powerline_colorscheme="skwp"
+let g:Powerline_symbols = 'fancy'
+
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+" Active tagbar plugin
+nmap <F8> :TagbarToggle<CR>
+
+" Vim-go personalization
+au FileType go nmap <Leader>gd <Plug>(go-doc)
+au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+
+au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
+
+au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>b <Plug>(go-build)
+au FileType go nmap <leader>t <Plug>(go-test)
+
+au FileType go nmap gd <Plug>(go-def)
+
+au FileType go nmap <Leader>ds <Plug>(go-def-split)
+au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+au FileType go nmap <Leader>dt <Plug>(go-def-tab)
+
+au FileType go au BufWritePre <buffer> Fmt
+
+" Autoregen ctags @closing
+au BufWritePost *.go silent! !ctags -R &
+
+" PowerLine activation
+python from powerline.vim import setup as powerline_setup
+python powerline_setup()
+python del powerline_setup
+set rtp+=~/.powerline/powerline/bindings/vim
+
+set background=dark
+set laststatus=2
+set encoding=utf-8
+set fillchars+=stl:\ ,stlnc:\
+
+"set term=xterm-256color
+set termencoding=utf-8
+set t_Co=256
+
+set nu!
+autocmd FileType html setlocal shiftwidth=2 tabstop=2
+autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4
+autocmd FileType css setlocal expandtab shiftwidth=2 softtabstop=2
+autocmd FileType puppet setlocal expandtab shiftwidth=2 softtabstop=2
+" Beavher enviroment like bash for load menu
+set wildmode=longest:full
+set wildmenu
+
+set foldmethod=syntax
+set foldnestmax=10
+set nofoldenable
+set foldlevel=0
+
+" Set tab default
+set tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
+" Set 10 lines before or after coursorline scroll
+set so=10
+set paste
+
+set laststatus=2
+set statusline=%{GitBranch()}
+```
+
+
 ```bash
 update_system='sudo apt-get update; sudo etckeeper commit "Aggiornamento Quotidiano"; sudo apt-get upgrade; sudo apt-get dist-upgrade; sudo apt-get check; sudo apt-get autoremove; sudo apt-get autoclean'
 ```
