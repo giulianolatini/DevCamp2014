@@ -203,7 +203,8 @@ fi
 zstyle :omz:plugins:ssh-agent identities id_rsa latini.giuliano@gmail.com
 
 # Setup Powerline
-. ~/.powerline/powerline/bindings/zsh/powerline.zsh
+# how install with command: sudo pip install --user git+git://github.com/Lokaltog/powerline 
+. ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
 
 # Setup Google Develop SDK
 export FPATH="/Users/wolf/.oh-my-zsh/custom/plugins/gcloud-zsh-completion/src/:$FPATH"
