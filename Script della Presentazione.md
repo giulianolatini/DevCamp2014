@@ -118,6 +118,46 @@ export SSH_KEYS_PATH="/Users/wolf/.ssh"
 ssh-add $SSH_KEYS_PATH/test-pp02.key
 ssh-add $SSH_KEYS_PATH/test-pp03.key
 ```
+
+
+Aggiungo la parte pubblica della chiave appena generata (`id_rsa.pub`) al db che openssh-server utilizza per ricavare le parti pubbliche utilizzate per decodificare la richiesta di connessione. Se la parte pubblica della propria chiave è presente, la decodifica della richiesta di accesso (codificata con la propria parte privata) ha successo, l'accesso alla shell è consentito senza la richiesta di password, l'esempio classico d'uso di questa modalità è lo scripting di attività da un sistema ad un altro remoto.
+
+```bash
+cd ~/.ssh
+cat id_rsa.pub >> authorized_keys
+
+cd /etc
+git remote add origin root@localhost:/var/git/localconf_etc.git
+git add *
+etckeeper commit "First Commit"
+git push -u origin master
+```
+
+```txt
+Counting objects: 1658, done.
+Compressing objects: 100% (1282/1282), done.
+Writing objects: 100% (1658/1658), 902.11 KiB, done.
+Total 1658 (delta 85), reused 0 (delta 0)
+To root@localhost:/var/git/localconf_etc.git
+ * [new branch]      master -> master
+Branch master set up to track remote branch master from origin.
+```
+
+Configurazione Generale
+
+```bash
+sudo apt-get install vim-addon-manager vim-puppet vim-scripts
+sudo apt-get install zsh
+sudo chsh -s $(which zsh) # Modifica della shell chiamata al login
+sudo apt-get install curl
+sudo curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+sudo apt-get install git-flow
+sudo apt-get install python-pip
+sudo apt-get install exuberant-ctags
+sudo pip install --user git+git://github.com/Lokaltog/powerline
+sudo apt-get install byobu
+```
+
 Configurazione Avanzata di .zshrc
 ```bash
 # Path to your oh-my-zsh configuration.
@@ -185,6 +225,8 @@ plugins=(git ssh-agent git-flow git-remote-branch github osx sublime sudo rsync 
 export GOROOT="/usr/local/go"
 export GOPATH="/Users/wolf/Sviluppo/go"
 
+# When install to Linux with pip use this PATH envearoment export
+# export PATH=$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH
 export PATH=$GOPATH/bin:$GOROOT/bin:$HOME/bin:/opt/local/bin:/usr/local/bin:/opt/local/bin:$PATH
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -229,45 +271,6 @@ export SSH_KEYS_PATH="/Users/wolf/.ssh"
 ssh-add $SSH_KEYS_PATH/test-pp02.key
 ssh-add $SSH_KEYS_PATH/test-pp03.key
 
-```
-
-
-Aggiungo la parte pubblica della chiave appena generata (`id_rsa.pub`) al db che openssh-server utilizza per ricavare le parti pubbliche utilizzate per decodificare la richiesta di connessione. Se la parte pubblica della propria chiave è presente, la decodifica della richiesta di accesso (codificata con la propria parte privata) ha successo, l'accesso alla shell è consentito senza la richiesta di password, l'esempio classico d'uso di questa modalità è lo scripting di attività da un sistema ad un altro remoto.
-
-```bash
-cd ~/.ssh
-cat id_rsa.pub >> authorized_keys
-
-cd /etc
-git remote add origin root@localhost:/var/git/localconf_etc.git
-git add *
-etckeeper commit "First Commit"
-git push -u origin master
-```
-
-```txt
-Counting objects: 1658, done.
-Compressing objects: 100% (1282/1282), done.
-Writing objects: 100% (1658/1658), 902.11 KiB, done.
-Total 1658 (delta 85), reused 0 (delta 0)
-To root@localhost:/var/git/localconf_etc.git
- * [new branch]      master -> master
-Branch master set up to track remote branch master from origin.
-```
-
-Configurazione Generale
-
-```bash
-sudo apt-get install vim-addon-manager vim-puppet vim-scripts
-sudo apt-get install zsh
-sudo chsh -s $(which zsh) # Modifica della shell chiamata al login
-sudo apt-get install curl
-sudo curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
-sudo apt-get install git-flow
-sudo apt-get install python-pip
-sudo apt-get install exuberant-ctags
-sudo pip install --user git+git://github.com/Lokaltog/powerline
-sudo apt-get install byobu
 ```
 
 Configurazione di ViM
