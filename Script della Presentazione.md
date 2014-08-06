@@ -152,6 +152,8 @@ sudo chsh -s $(which zsh) # Modifica della shell chiamata al login
 sudo apt-get install curl
 sudo curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
 sudo apt-get install git-flow
+sudo apt-get install build-essential cmake
+sudo apt-get install python-dev
 sudo apt-get install python-pip
 sudo apt-get install exuberant-ctags
 sudo pip install --user git+git://github.com/Lokaltog/powerline
