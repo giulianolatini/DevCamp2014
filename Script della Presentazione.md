@@ -340,6 +340,14 @@ set laststatus=2
 set statusline=%{GitBranch()}
 ```
 
+Installazione Pachetti PATHOGEN:
+```bash
+cd ~/.vim/bundle
+git clone https://github.com/scrooloose/nerdtree.git
+
+```
+
+
 Configurazione ViM Estesa per sviluppo software (lingiaggi supportati: Puppet, Google Go, Python)
 ```vim
 execute pathogen#infect('stuff/{}')
