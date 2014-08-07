@@ -36,6 +36,15 @@ azure vm create test-pp02.cloudapp.net b39f27a8b8c64d52b05eac6a62ebad85__Ubuntu-
 
 ssh -p 22 wolf@test-pp02.cloudapp.net -c blowfish -C -X #Connessione ed apertura shell come utente wolf
 
+# Pre-stage installation (installazione prerequisiti)
+wget https://apt.puppetlabs.com/puppetlabs-release-trusty.deb
+sudo dpkg -i puppetlabs-release-trusty.deb
+sudo apt-get update
+
+# Install Puppet-Master
+sudo apt-get -y install puppetmaster-passenger
+sudo apt-get -y install puppetmaster
+
 sudo puppet module install thomasvandoren-etckeeper
 sudo puppet module install thomasvandoren-etckeeper
 sudo puppet module install jpadams-puppet_vim_env
