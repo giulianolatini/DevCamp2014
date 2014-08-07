@@ -430,6 +430,11 @@ set fillchars+=stl:\ ,stlnc:\
 set term=xterm-256color
 set termencoding=utf-8
 ```
+Installazione Pacchetto PATHOGEN:
+```bash
+mkdir -p ~/.vim/autoload ~/.vim/bundle && \
+curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+```
 
 Configurazione ViM Estesa 
 ```vim
@@ -471,13 +476,16 @@ set laststatus=2
 set statusline=%{GitBranch()}
 ```
 
-Installazione Pachetti PATHOGEN:
+Installazione Pacchetti PATHOGEN:
 ```bash
 cd ~/.vim/bundle
 git clone https://github.com/scrooloose/nerdtree.git
 
 ```
-
+Installazione Pacchetto Vundle:
+```bash
+git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+```
 
 Configurazione ViM Estesa per sviluppo software (lingiaggi supportati: Puppet, Google Go, Python)
 ```vim
