@@ -636,7 +636,7 @@ au BufWritePost *.go silent! !ctags -R &
 python from powerline.vim import setup as powerline_setup
 python powerline_setup()
 python del powerline_setup
-set rtp+=~/.powerline/powerline/bindings/vim
+set rtp+=~/.local/lib/python2.7/site-packages/powerline/bindings/vim
 
 set background=dark
 set laststatus=2
