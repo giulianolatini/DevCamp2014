@@ -168,6 +168,15 @@ sudo apt-get install exuberant-ctags
 sudo pip install --user git+git://github.com/Lokaltog/powerline
 sudo apt-get install byobu
 ```
+Nel caso il sistema non sia localizzato in UTF8 (come le caso di una installazioen non localizzata, 
+vedi contenuto del file:
+```bash
+cat /etc/default/locale
+```
+Se il file contiene il valore LANG=C e non LANG=C.UTF-8 esso va reimpostato nel file e aggironato live con il comando
+```bash
+update-locale LANG=de_DE.UTF-8
+```
 
 File da aggiungere sotto ~/.oh-my-zsh/themes come ducknorris.zsh-theme
 ```bash
