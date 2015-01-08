@@ -175,7 +175,7 @@ cat /etc/default/locale
 ```
 Se il file contiene il valore LANG=C e non LANG=C.UTF-8 esso va reimpostato nel file e aggironato live con il comando
 ```bash
-update-locale LANG=de_DE.UTF-8
+update-locale LANG=C.UTF-8
 ```
 
 File da aggiungere sotto ~/.oh-my-zsh/themes come ducknorris.zsh-theme
