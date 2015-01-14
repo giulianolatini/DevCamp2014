@@ -97,13 +97,16 @@ make install clean
 ##### Per convertire l'archivio dei ports installati nel nuovo formato
 #### Comandi Utili: 
 ```bash
-        portmaster -L 		# Lista pacchettio da aggiornare
+        portmaster -L 		# Lista pacchetti da aggiornare
+        portmaster -l 		# Lista pacchetti organizzati per macrocategorie
         portmaster -a		# Aggiornata tutti i pacchetti
         portmaster -af		# forza l'aggiornamento in caso di errori
         portmaster shells/bash  # installazione del paccheto bash nella classe shells
 ```
+Usare Portmaster per l'installazione di pacchetti ha il vantaggio di eseguire automaticamente make clean e cancellare la temporary work dir per la parte di configurazione e costrzuione del pacchetto compilato a meno di non specificare l'ozione -K
 
-
+Note:
+By default, Portmaster will make a backup package before deleting the existing port. If the installation of the new version is successful, Portmaster will delete the backup. Using -b will instruct Portmaster not to automatically delete the backup. Adding -i will start Portmaster in interactive mode, prompting for confirmation before upgrading each port. Many other options are available. Read through the manual page for portmaster(8) for details regarding their usage.
 
 
 ### Script di installazione
