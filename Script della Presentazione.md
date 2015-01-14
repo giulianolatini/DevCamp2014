@@ -61,6 +61,24 @@ azure vm shutdown test-pp02 # spengo la vm test-pp02
 
 ![azure vm start][azure-cli#04]
 
+### Uso dei Ports in FreeBSD (dalla 10.01 in poi)
+
+#### Installazione Ports usando il tool nativo <b>portsnap<b>
+##### Installazione
+```bash
+# Scarico l'archivio dei ports e ne verifico le signature
+portsnap fetch
+# scompatto in /usr/ports l'archivio scaricato
+portsnap extract
+```
+##### Aggiornamento
+
+```bash
+# Aggiorno il ramo /usr/ports
+portsnap fetch update
+```
+
+
 ### Script di installazione
 
 ```bash
