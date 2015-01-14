@@ -78,6 +78,26 @@ portsnap extract
 portsnap fetch update
 ```
 
+#### Installazione pacchetti di gestione Ports consigliati
+
+```bash
+# Aggiorno il ramo /usr/ports
+cd /usr/ports/ports-mgmt/portmaster
+make install clean
+```
+##### Al termine dell'installazione seguire la direttiva:
+    Enable PKGNG as your package format:
+```bash
+        echo 'WITH_PKGNG=yes' >> /etc/make.conf
+```
+    Then convert your /var/db/pkg database to the new pkg format:
+```bash
+        pkg2ng
+```
+###### Per convertire l'archivio dei ports installati nel nuovo formato
+
+
+
 
 ### Script di installazione
 
