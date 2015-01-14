@@ -94,7 +94,14 @@ make install clean
 ```bash
         pkg2ng
 ```
-###### Per convertire l'archivio dei ports installati nel nuovo formato
+##### Per convertire l'archivio dei ports installati nel nuovo formato
+#### Comandi Utili: 
+```bash
+        portmaster -L 		# Lista pacchettio da aggiornare
+        portmaster -a		# Aggiornata tutti i pacchetti
+        portmaster -af		# forza l'aggiornamento in caso di errori
+        portmaster shells/bash  # installazione del paccheto bash nella classe shells
+```
 
 
 
