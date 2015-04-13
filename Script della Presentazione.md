@@ -185,6 +185,8 @@ cat id_rsa.pub >> authorized_keys
 
 cd /etc
 git remote add origin root@localhost:/var/git/localconf_etc.git
+o
+git remote add origin ssh://root@localhost:[ssh-port]/var/git/localconf_etc.git
 git add *
 etckeeper commit "First Commit"
 git push -u origin master
