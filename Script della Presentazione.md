@@ -205,6 +205,15 @@ Branch master set up to track remote branch master from origin.
 Configurazione Generale
 
 ```bash
+
+# Comandi Brevi
+sudo apt-get -y install vim-addon-manager vim-puppet vim-scripts zsh curl git-flow build-essential cmake python-dev python-pip exuberant-ctags byobu
+sudo curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+sudo pip install git+git://github.com/Lokaltog/powerline
+
+sudo chsh -s $(which zsh) 
+# Comandi Singoli
+
 sudo apt-get install vim-addon-manager vim-puppet vim-scripts
 sudo apt-get install zsh
 sudo chsh -s $(which zsh) # Modifica della shell chiamata al login
