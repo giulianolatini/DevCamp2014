@@ -563,6 +563,10 @@ Installazione Pacchetto Vundle:
 ```bash
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 ```
+Installazione Pachetto YouComplete (switch di compilazione per OSX 10.10)
+```bash
+./install.sh --clang-completer --system-libclang --gocode-completer --system-boost
+```
 
 Configurazione ViM Estesa per sviluppo software (lingiaggi supportati: Puppet, Google Go, Python)
 ```vim
