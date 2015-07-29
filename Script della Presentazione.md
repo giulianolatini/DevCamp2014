@@ -111,6 +111,15 @@ By default, Portmaster will make a backup package before deleting the existing p
 
 ### Script di installazione
 
+Accesso al server **Per Ubuntu Server 15.04**
+aggiungere in coda al file ```/etc/ssh/sshd_config``` le seguenti righe:
+```bash
+# enable all ciphers!
+# obtained with ssh -Q cipher localhost | paste -d , -s
+Ciphers blowfish-cbc,arcfour256,aes256-cbc,aes192-ctr,aes256-ctr,aes256-gcm@openssh.com,chacha20-poly1305@openssh.com
+```
+per abilitare l'accesso via protocolli veloci e/o sicuri
+
 ```bash
 sudo -i
 
