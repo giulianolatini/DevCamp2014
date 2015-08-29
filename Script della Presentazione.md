@@ -216,14 +216,16 @@ Configurazione Generale
 ```bash
 
 # Comandi Brevi
-sudo apt-get -y install vim-addon-manager vim-puppet vim-scripts zsh curl git-flow build-essential cmake python-dev python-pip exuberant-ctags byobu
+sudo apt-get -y install locate vim-addon-manager vim-puppet vim-scripts zsh curl git-flow build-essential cmake python-dev python-pip exuberant-ctags byobu
 sudo curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
 sudo pip install git+git://github.com/Lokaltog/powerline
 
 sudo chsh -s $(which zsh) 
+sudo updatedb
 # Comandi Singoli
 
 sudo apt-get install vim-addon-manager vim-puppet vim-scripts
+sudo apt-get install locate
 sudo apt-get install zsh
 sudo chsh -s $(which zsh) # Modifica della shell chiamata al login
 sudo apt-get install curl
@@ -235,6 +237,7 @@ sudo apt-get install python-pip
 sudo apt-get install exuberant-ctags
 sudo pip install --user git+git://github.com/Lokaltog/powerline
 sudo apt-get install byobu
+sudo updatedb
 ```
 Nel caso il sistema non sia localizzato in UTF8 (come le caso di una installazioen non localizzata, 
 vedi contenuto del file:
