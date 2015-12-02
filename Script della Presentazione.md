@@ -185,7 +185,6 @@ ssh-add $SSH_KEYS_PATH/test-pp02.key
 ssh-add $SSH_KEYS_PATH/test-pp03.key
 ```
 
-
 Aggiungo la parte pubblica della chiave appena generata (`id_rsa.pub`) al db che openssh-server utilizza per ricavare le parti pubbliche utilizzate per decodificare la richiesta di connessione. Se la parte pubblica della propria chiave è presente, la decodifica della richiesta di accesso (codificata con la propria parte privata) ha successo, l'accesso alla shell è consentito senza la richiesta di password, l'esempio classico d'uso di questa modalità è lo scripting di attività da un sistema ad un altro remoto.
 
 ```bash
@@ -214,17 +213,18 @@ Branch master set up to track remote branch master from origin.
 Configurazione Generale
 
 ```bash
-
 # Comandi Brevi
-sudo apt-get -y install locate vim-addon-manager vim-puppet vim-scripts zsh curl git-flow build-essential cmake python-dev python-pip exuberant-ctags byobu
+sudo apt-get -y install locate vim-addon-manager vim-puppet vim-scripts vim-syntax-go vim-nox zsh curl git-flow build-essential cmake python-dev python-pip exuberant-ctags byobu
 sudo curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
 sudo pip install git+git://github.com/Lokaltog/powerline
+sudo apt-get remove vim-tiny
 
 sudo chsh -s $(which zsh) 
 sudo updatedb
 # Comandi Singoli
 
-sudo apt-get install vim-addon-manager vim-puppet vim-scripts
+sudo apt-get install vim-addon-manager vim-puppet vim-scripts vim-syntax-go vim-nox
+sudo apt-get remove vim-tiny
 sudo apt-get install locate
 sudo apt-get install zsh
 sudo chsh -s $(which zsh) # Modifica della shell chiamata al login
@@ -243,11 +243,17 @@ Nel caso il sistema non sia localizzato in UTF8 (come le caso di una installazio
 vedi contenuto del file:
 ```bash
 cat /etc/default/locale
+--- /etc/default/locale ---
+LANG=C.UTF-8
+LC_ALL=C.UTF-8
+LANGUAGE=C.UTF-8
+--- END ---
 ```
-Se il file contiene il valore LANG=C e non LANG=C.UTF-8 esso va reimpostato nel file e aggironato live con il comando
+Se il file contiene il valore LANG=C e non LANG=C.UTF-8 esso va reimpostato nel file e Riavviato il sistema, usando il comando
 ```bash
-update-locale LANG=C.UTF-8
+update-locale
 ```
+si effettua il check per verificare la corretta assegnazione delle variabili di localizzazione.
 
 File da aggiungere sotto ~/.oh-my-zsh/themes come ducknorris.zsh-theme
 ```bash
@@ -440,12 +446,16 @@ HIST_STAMPS="dd/mm/yyyy"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git ssh-agent git-flow git-remote-branch github osx sublime sudo rsync python npm node macports zsh-syntax-highlighting)
+plugins=(go golang docker docker-compose postgres \
+git ssh-agent git-flow git-remote-branch github git-extras git-prompt gitfast gitignore \ 
+sudo rsync python pip \
+tmux tmuxinator ubuntu urltools vim-interaction colored-man-pages man colorize history \
+zsh_reload zsh-navigation-tools zsh-syntax-highlighting)
 
 # User configuration
 # The next configuration path for go language
 export GOROOT="/usr/local/go"
-export GOPATH="/Users/wolf/Sviluppo/go"
+export GOPATH="/root/Sviluppo/go"
 
 # When install to Linux with pip use this PATH envearoment export
 # export PATH=$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH
@@ -464,20 +474,12 @@ fi
 # export ARCHFLAGS="-arch x86_64"
 
 #  enable and load ssh-agent identities
-zstyle :omz:plugins:ssh-agent identities id_rsa latini.giuliano@gmail.com
+#zstyle :omz:plugins:ssh-agent identities id_rsa latini.giuliano@gmail.com
+zstyle :omz:plugins:ssh-agent identities id_rsa
 
 # Setup Powerline
 # how install with command: sudo pip install --user git+git://github.com/Lokaltog/powerline 
-. ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
-
-# Setup Google Develop SDK
-export FPATH="/Users/wolf/.oh-my-zsh/custom/plugins/gcloud-zsh-completion/src/:$FPATH"
-autoload -U compinit compdef
-compinit
-# The next line updates PATH for the Google Cloud SDK.
-. ~/google-cloud-sdk/path.zsh.inc
-# The next line enables bash completion for gcloud.
-. ~/google-cloud-sdk/completion.zsh.inc
+. /usr/local/lib/python2.7/dist-packages/powerline/bindings/zsh/powerline.zsh
 
 # Setup oh-my-zsh
 source $ZSH/oh-my-zsh.sh
@@ -489,81 +491,12 @@ else
 fi
 
 # ssh adding others keys
-export SSH_KEYS_PATH="/Users/wolf/.ssh"
-ssh-add $SSH_KEYS_PATH/test-pp02.key
-ssh-add $SSH_KEYS_PATH/test-pp03.key
-
+export SSH_KEYS_PATH="/root/.ssh"
+#ssh-add $SSH_KEYS_PATH/test-pp02.key
+#ssh-add $SSH_KEYS_PATH/test-pp03.key
 ```
 
 Configurazione di ViM
-
-```vim
-set nu!
-autocmd FileType html setlocal shiftwidth=2 tabstop=2
-autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4
-autocmd FileType css setlocal expandtab shiftwidth=2 softtabstop=2
-autocmd FileType puppet setlocal expandtab shiftwidth=2 softtabstop=2
-set tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
-set paste
-let mapleader = ","
-set laststatus=2
-set statusline=%{GitBranch()}
-python from powerline.vim import setup as powerline_setup
-python powerline_setup()
-python del powerline_setup
-set rtp+=~/.powerline/powerline/bindings/vim
-let g:Powerline_symbols = 'fancy'
-set encoding=utf-8
-set t_Co=256
-set fillchars+=stl:\ ,stlnc:\
-set term=xterm-256color
-set termencoding=utf-8
-```
-Installazione Pacchetto PATHOGEN:
-```bash
-mkdir -p ~/.vim/autoload ~/.vim/bundle && \
-curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
-```
-
-Configurazione ViM Estesa 
-```vim
-execute pathogen#infect('stuff/{}')
-call pathogen#infect()
-
-syntax on
-filetype plugin indent on
-
-let g:syntastic_always_populate_loc_list=1
-
-"To enable Just puppet-lint and disable the parser uncomment next line
-let g:syntastic_puppet_checkers=['puppetlint']
-let g:Powerline_symbols = 'unicode'
-let g:Powerline_theme="skwp"
-let g:Powerline_colorscheme="skwp"
-let g:Powerline_symbols = 'fancy'
-
-set rtp+=.powerline/powerline/bindings/vim
-
-set background=dark
-set laststatus=2
-set encoding=utf-8
-set fillchars+=stl:\ ,stlnc:\
-
-set term=xterm-256color
-set termencoding=utf-8
-set t_Co=256
-
-set nu!
-autocmd FileType html setlocal shiftwidth=2 tabstop=2
-autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4
-autocmd FileType css setlocal expandtab shiftwidth=2 softtabstop=2
-autocmd FileType puppet setlocal expandtab shiftwidth=2 softtabstop=2
-set tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
-set paste
-let mapleader = ","
-set laststatus=2
-set statusline=%{GitBranch()}
-```
 
 Installazione Pacchetti PATHOGEN:
 ```bash
@@ -582,7 +515,6 @@ Installazione Pachetto YouComplete (switch di compilazione per OSX 10.10)
 
 Configurazione ViM Estesa per sviluppo software (lingiaggi supportati: Puppet, Google Go, Python)
 ```vim
-execute pathogen#infect('stuff/{}')
 call pathogen#infect()
 
 set nocompatible              " be iMproved, required
@@ -620,6 +552,8 @@ Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 " Adding Color Themes
 Plugin 'flazz/vim-colorschemes'
+" Adding PaperColor
+Plugin 'NLKNguyen/papercolor-theme'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -636,7 +570,7 @@ call vundle#end()            " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
-syntax on
+syntax enable
 filetype plugin indent on
 
 " GUI setting font case for [GTK2, Photon, KDE, X11]
@@ -651,19 +585,25 @@ if has("gui_running")
     set guifont=-*-courier-medium-r-normal-*-*-180-*-*-m-*-*
   else
 "    set guifont=Courier_New:h11:cDEFAULT
-	set guifont=Inconsolata\ for\ PowerLine:h16
+    set guifont=Inconsolata\ for\ PowerLine:h16
   endif
 endif
 
 " Setting colorscheme and coursorline feauture
-"colorscheme zenburn
-"let g:zenburn_force_dark_Background=1
+set t_Co=256   " This is may or may not needed.
+
+"set background=light
+"set background=dark
+"colorscheme PaperColor
+"colorscheme material-theme
+colorscheme zenburn
+let g:zenburn_force_dark_Background=1
 
 let g:molokai_original = 1
-let g:rehash256 = 1
+"let g:rehash256 = 1
 
 " Autostart NERDTreeToggle
-au VimEnter * NERDTreeToggle
+"au VimEnter * NERDTreeToggle
 " Autoclose NERDTreeToggle when is only window opened
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
@@ -729,7 +669,7 @@ au BufWritePost *.go silent! !ctags -R &
 python from powerline.vim import setup as powerline_setup
 python powerline_setup()
 python del powerline_setup
-set rtp+=~/.local/lib/python2.7/site-packages/powerline/bindings/vim
+set rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim
 
 set background=dark
 set laststatus=2
@@ -738,7 +678,6 @@ set fillchars+=stl:\ ,stlnc:\
 
 "set term=xterm-256color
 set termencoding=utf-8
-set t_Co=256
 
 set nu!
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
@@ -764,7 +703,7 @@ set laststatus=2
 set statusline=%{GitBranch()}
 ```
 
-
+Alias di aggiornamento completo del sistema
 ```bash
 update_system='sudo apt-get update; sudo etckeeper commit "Aggiornamento Quotidiano"; sudo apt-get upgrade; sudo apt-get dist-upgrade; sudo apt-get check; sudo apt-get autoremove; sudo apt-get autoclean'
 ```
