@@ -500,9 +500,13 @@ Configurazione di ViM
 
 Installazione Pacchetti PATHOGEN:
 ```bash
+mkdir -p ~/.vim/autoload/ ; mkdir -p ~/.vim/bundle/ ; cd ~/.vim/autoload/  
+wget https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim  
+```
+Installazione filebrowser interno a Vim
+```bash
 cd ~/.vim/bundle
 git clone https://github.com/scrooloose/nerdtree.git
-
 ```
 Installazione Pacchetto Vundle:
 ```bash
