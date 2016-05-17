@@ -201,7 +201,7 @@ etckeeper commit "First Commit"
 git branch --set-upstream-to=origin/master master
 git pull
 git push
-oppure
+# oppure
 git push -u origin master
 ```
 
