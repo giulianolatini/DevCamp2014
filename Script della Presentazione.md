@@ -197,6 +197,11 @@ o
 git remote add origin ssh://root@localhost:[ssh-port]/var/git/localconf_etc.git
 git add *
 etckeeper commit "First Commit"
+# nel caso vada popolato un repository github o altro servizio cloud
+git branch --set-upstream-to=origin/master master
+git pull
+git push
+oppure
 git push -u origin master
 ```
 
