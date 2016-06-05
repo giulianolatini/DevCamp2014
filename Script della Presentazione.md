@@ -219,7 +219,7 @@ Configurazione Generale
 
 ```bash
 # Comandi Brevi
-sudo apt-get -y install locate vim-addon-manager vim-puppet vim-scripts vim-syntax-go vim-nox zsh curl git-flow build-essential cmake python-dev python-pip exuberant-ctags byobu
+sudo apt-get -y install locate vim-addon-manager vim-youcompleteme vim-puppet vim-scripts vim-syntax-go vim-nox zsh curl git-flow build-essential cmake python-dev python-pip exuberant-ctags byobu
 sudo curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
 sudo pip install git+git://github.com/Lokaltog/powerline
 sudo apt-get remove vim-tiny
