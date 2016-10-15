@@ -1,0 +1,344 @@
+#### Contents of the preconfiguration file (for squeeze)
+### Localization
+# Language:
+# Choices: C, Albanian, Arabic, Asturian, Basque, Belarusian, Bosnian, Bulgarian, Catalan, Chinese (Simplified), Chinese (Traditional), Croatian, Czech, Danish, Dutch, English, Esperanto, Estonian, Finnish, French, Galician, German, Greek, Hebrew, Hungarian, Icelandic, Indonesian, Irish, Italian, Japanese, Kazakh, Korean, Kurdish, Latvian, Lithuanian, Macedonian, Northern Sami, Norwegian Bokmaal, Norwegian Nynorsk, Persian, Polish, Portuguese, Portuguese (Brazil), Romanian, Russian, Serbian (Cyrillic), Slovak, Slovenian, Spanish, Swedish, Tagalog, Thai, Turkish, Ukrainian, Uyghur, Vietnamese, Welsh
+d-i	localechooser/languagelist	select	C
+# Paese, territorio o area:
+# Choices: Italia, Svizzera, altro
+d-i	localechooser/shortlist	select	Italia
+# country code or "manual" (for internal use)
+choose-mirror-bin	mirror/country	string	it_IT
+d-i	mirror/country	string	Italia
+d-i localechooser/supported-locales C.UTF-8, en_US.UTF-8, it_IT.UTF-8
+# «Locale» predefinito sul sistema:
+# Choices: Nessuno, C.UTF-8, 
+locales	locales/default_environment_locale	select	C.UTF-8
+locales	locales/locales_to_be_generated	multiselect en_US ISO-8859-1, en_US.ISO-8859-15 ISO-8859-15, en_US.UTF-8 UTF-8,, en_GB.UTF-8 UTF-8, en_GB ISO-8859-1, en_GB.ISO-8859-15 ISO-8859-15, it_IT ISO-8859-1, it_IT.UTF-8 UTF-8, it_IT@euro ISO-8859-15
+# Locale di sistema:
+# Choices: it_IT.UTF-8, en_US.UTF-8
+d-i	debian-installer/locale	select	it_IT.UTF-8
+d-i	localechooser/preferred-locale	select	it_IT.UTF-8
+# Dimensione del carattere:
+# Choices: 8x13, 8x14, 8x15, 8x16, 8x18
+console-setup	console-setup/fontsize-fb47	select	8x16
+# for internal use
+console-setup	console-setup/fontsize	string	8x16
+# Determinare la disposizione della tastiera?
+keyboard-configuration	console-setup/ask_detect	boolean	false
+# Determinazione disposizione tastiera
+keyboard-configuration	console-setup/detect	detect-keyboard	
+# Componenti del programma d'installazione da caricare:
+# Choices: choose-mirror: Choose mirror to install from (menu item), download-installer: Download installer components, fdisk-udeb: Manually partition a hard drive (fdisk), iso-scan: Scan hard drives for an installer ISO image, load-iso: Load installer components from an installer ISO, load-media: Load installer components from removable media, lowmem: free memory for lowmem install, ltsp-client-builder: build an LTSP environment in the installer target, maas-enlist-udeb: Enlist a host with a MAAS server (installer integration), mouse-modules-3.19.0-25-generic-di: Mouse support, multipath-modules-3.19.0-25-generic-di: DM-Multipath support, network-console: Continue installation remotely using SSH, oem-config-udeb: Prepare for OEM configuration, openssh-client-udeb: secure shell client for the Debian installer, parted-udeb: Manually partition a hard drive (parted), rescue-mode: mount requested partition and start a rescue shell, speakup-modules-3.19.0-25-generic-di: speakup modules, squashfs-modules-3.19.0-25-generic-di: squashfs modules, vlan-modules-3.19.0-25-generic-di: vlan modules, vlan-udeb: user mode programs to enable VLANs on your ethernet devices
+d-i	anna/choose_modules	multiselect	
+# Metodo per commutare fra modo nazionale e latino:
+# Choices: Bloc Maiusc, Alt destro (AltGr), Ctrl destro, Maiusc destro, Tasto Windows destro, Tasto menù, Alt + Maiusc, Ctrl + Maiusc, Ctrl + Alt, Alt + Bloc Maiusc, Ctrl sinistro + Maiusc sinistro, Alt sinistro, Ctrl sinistro, Maiusc sinistro, Tasto Windows sinistro, Tasto Bloc Scorr, Nessuna commutazione
+d-i	keyboard-configuration/toggle	select	Alt+Shift
+# Metodo per commutare fra modo nazionale e latino:
+# Choices: Bloc Maiusc, Alt destro (AltGr), Ctrl destro, Maiusc destro, Tasto Windows destro, Tasto menù, Alt + Maiusc, Ctrl + Maiusc, Ctrl + Alt, Alt + Bloc Maiusc, Ctrl sinistro + Maiusc sinistro, Alt sinistro, Ctrl sinistro, Maiusc sinistro, Tasto Windows sinistro, Tasto Bloc Scorr, Nessuna commutazione
+keyboard-configuration	keyboard-configuration/toggle	select	No toggling
+# Mappa della tastiera da usare:
+# Choices: Inglese (Stati Uniti), Albanese, Arabo, Asturiano, Bangladesh, Bielorussa, Bengalese, Belga, Bosniaco, Brasiliana, Inglese (Gran Bretagna), Bulgara, Bulgara (layout fonetico), Francese (Canada), Canadese (multilingua), Catalano, Cinese, Croata, Ceca, Danese, Olandese, Dvorak, Dzongkha, Esperanto, Estone, Etiope, Finlandese, Francese, Georgiano, Tedesca, Greca, Gujarati, Gurmukhi, Ebraica, Hindi, Ungherese, Islandese, Irlandese, Italiana, Giapponese, Kannada, Kazako, Khmer, Chirghisa, Coreano, Curdo (layout F), Curdo (layout Q), Lao, Latino-americana, Lettone, Lituana, Macedone, Malayalam, Nepalese, Sami del Nord, Norvegese, Persiano, Polacca, Portoghese, Punjabi, Rumena, Russa, Serba (cirillica), Sindhi, Sinhala, Slovacca, Slovena, Spagnola, Svedese, Francese (Svizzera), Tedesca (Svizzera), Tagica, Tamil, Telugu, Tailandese, Tibetana, Turca (layout F), Turca (layout Q), Ucraina, Uyghur, Vietnamita
+keyboard-configuration	keyboard-configuration/xkb-keymap	select	Italiana
+# Tasto «componi»:
+# Choices: Nessun tasto «componi», Alt destro (AltGr), Ctrl destro, Tasto Windows destro, Tasto menù, Tasto Windows sinistro, Bloc Maiusc
+keyboard-configuration	keyboard-configuration/compose	select	No compose key
+# Ignorare domande con priorità inferiore a:
+# Choices: critica, alta, media, bassa
+debconf	debconf/priority	select	high
+# for internal use
+keyboard-configuration	keyboard-configuration/store_defaults_in_debconf_db	boolean	true
+# for internal use
+keyboard-configuration	keyboard-configuration/layoutcode	string	it
+# Codifica da usare nella console:
+# Choices: ARMSCII-8, CP1251, CP1255, CP1256, GEORGIAN-ACADEMY, GEORGIAN-PS, IBM1133, ISIRI-3342, ISO-8859-1, ISO-8859-10, ISO-8859-11, ISO-8859-13, ISO-8859-14, ISO-8859-15, ISO-8859-16, ISO-8859-2, ISO-8859-3, ISO-8859-4, ISO-8859-5, ISO-8859-6, ISO-8859-7, ISO-8859-8, ISO-8859-9, KOI8-R, KOI8-U, TIS-620, UTF-8, VISCII
+console-setup	console-setup/charmap47	select	UTF-8
+# Disposizione della tastiera:
+# Choices: Italiana, Italiana - Georgiana (Italia), Italiana - Italiana (Macintosh), Italiana - Italiana (tastiera USA con lettere italiane), Italiana - Italiana (tasti muti rimossi), Italiana - Italian (IBM 142), Italiana - Italian (Winkeys)
+keyboard-configuration	keyboard-configuration/variant	select	Italiana
+# Area geografica:
+# Choices: Africa, America, Antartide, Austrialia, Artide, Asia, Atlantico, Europa, Indiano, Pacifico, SystemV, Stati Uniti, Altre
+tzdata	tzdata/Areas	select	Europe
+# Carattere per la consolle:
+# Choices: Fixed, Goha, GohaClassic, Terminus, TerminusBold, TerminusBoldVGA, VGA, Do not change the boot/kernel font, Let the system select a suitable font
+console-setup	console-setup/fontface47	select	Terminus
+# Dimensione del carattere:
+# Choices: 
+console-setup	console-setup/fontsize-text47	select	8x14
+
+### Network configuration
+d-i netcfg/choose_interface select auto
+# If you have a slow dhcp server and the installer times out waiting for
+# it, this might be useful.
+#d-i netcfg/dhcp_timeout string 60
+
+# If you want the preconfiguration file to work on systems both with and
+# without a dhcp server, uncomment these lines and the static network
+# configuration below.
+#d-i netcfg/dhcp_failed note
+#d-i netcfg/dhcp_options select Configure network manually
+
+# Static network configuration.
+#d-i netcfg/get_nameservers string 192.168.1.1
+#d-i netcfg/get_ipaddress string 192.168.1.42
+#d-i netcfg/get_netmask string 255.255.255.0
+#d-i netcfg/get_gateway string 192.168.1.1
+#d-i netcfg/confirm_static boolean true
+
+# Any hostname and domain names assigned from dhcp take precedence over
+# values set here. However, setting the values still prevents the questions
+# from being shown, even if values come from dhcp.
+d-i netcfg/get_hostname string testvm
+d-i netcfg/get_domain string unassigned-domain
+# Creare il device TUN/TAP?
+openvpn	openvpn/create_tun	boolean	false
+
+### Partitioning
+d-i partman-auto/method string regular
+d-i partman-lvm/device_remove_lvm boolean true
+d-i partman-md/device_remove_md boolean true
+d-i partman-lvm/confirm boolean true
+d-i partman-auto/choose_recipe select atomic
+d-i partman/default_filesystem string btrfs
+
+d-i partman-auto/expert_recipe string small-swap : \
+        16384 65536 -1 btrfs 					   \
+            $primary{ } $bootable{ }  			   \
+            method{ format } format{ }  		   \
+            use_filesystem{ } filesystem{ btrfs }  \
+            options/compress{ } 				   \
+            mountpoint{ / } . 					   \
+        1024 4096 50% linux-swap				   \
+            method{ swap } format{ } .
+
+# This makes partman automatically partition without confirmation
+d-i partman-partitioning/confirm_write_new_label boolean true
+d-i partman/choose_partition select finish
+d-i partman/confirm boolean true
+d-i partman/confirm_nooverwrite boolean true
+
+## Controlling how partitions are mounted
+# The default is to mount by UUID, but you can also choose "traditional" to
+# use traditional device names, or "label" to try filesystem labels before
+# falling back to UUIDs.
+d-i partman/mount_style select uuid
+
+# Clock
+d-i clock-setup/utc-auto boolean true
+d-i clock-setup/utc boolean true
+# Fuso orario:
+# Choices: GMT, GMT+0, GMT+1, GMT+10, GMT+11, GMT+12, GMT+2, GMT+3, GMT+4, GMT+5, GMT+6, GMT+7, GMT+8, GMT+9, GMT-0, 
+# GMT-1, GMT-10, GMT-11, GMT-12, GMT-13, GMT-14, GMT-2, GMT-3, GMT-4, GMT-5, GMT-6, GMT-7, GMT-8, GMT-9, GMT0, 
+# Greenwich, UCT, UTC, Universal, Zulu
+tzdata	tzdata/Zones/Etc	select	UTC
+# Choices: Africa, Antartide, Asia, Oceano atlantico, Caraibi, America centrale, Europa, Oceano indiano, America del Nord, 
+# Oceania, America del Sud, altro
+d-i	localechooser/continentlist	select Europa
+# Fuso orario:
+tzsetup-udeb	tzsetup/select_all	select	Rome
+# Choices: Amsterdam, Andorra, Astrakhan, Athens, Belfast, Belgrade, Berlin, Bratislava, Brussels, Bucharest, Budapest, 
+# Busingen, Chisinau, Copenhagen, Dublin, Gibraltar, Guernsey, Helsinki, Isle_of_Man, Istanbul, Jersey, Kaliningrad, Kiev, Kirov, 
+# Lisbon, Ljubljana, London, Luxembourg, Madrid, Malta, Mariehamn, Minsk, Monaco, Moscow, Nicosia, Oslo, Paris, Podgorica, Prague, 
+# Riga, Rome, Samara, San_Marino, Sarajevo, Simferopol, Skopje, Sofia, Stockholm, Tallinn, Tirane, Tiraspol, Ulyanovsk, Uzhgorod, 
+# Vaduz, Vatican, Vienna, Vilnius, Volgograd, Warsaw, Zagreb, Zaporozhye, Zurich
+tzdata	tzdata/Zones/Europe	select	Rome
+# for internal use; can be preseeded
+tzsetup-udeb	tzsetup/geoip_server	string	http://geoip.ubuntu.com/lookup
+d-i clock-setup/ntp boolean true
+# Il fuso orario è corretto?
+tzsetup-udeb	tzsetup/selected	boolean	true
+
+# Packages, Mirrors, Image
+d-i base-installer/kernel/override-image string linux-server
+d-i base-installer/kernel/override-image string linux-image-amd64
+d-i mirror/http/proxy string
+d-i mirror/country string Italia
+d-i apt-setup/restricted boolean true
+d-i apt-setup/universe boolean true
+d-i pkgsel/install-language-support boolean true
+
+# Nome host mirror dell'archivio Ubuntu:
+choose-mirror-bin	mirror/http/hostname	string	it.archive.ubuntu.com
+### Apt setup
+# You can choose to install non-free and contrib software.
+#d-i apt-setup/non-free boolean true
+#d-i apt-setup/contrib boolean true
+# Uncomment this if you don't want to use a network mirror.
+#d-i apt-setup/use_mirror boolean false
+# Select which update services to use; define the mirrors to be used.
+# Values shown below are the normal defaults.
+d-i apt-setup/services-select multiselect security, updates
+d-i apt-setup/security_host string security.debian.org
+# Additional repositories, local[0-9] available
+#d-i apt-setup/local0/repository string \
+#       http://ppa.launchpad.net/ansible/ansible/ubuntu vivid main
+#d-i apt-setup/local0/comment string local server
+# Enable deb-src lines
+#d-i apt-setup/local0/source boolean true
+# URL to the public key of the local repository; you must provide a key or
+# apt will complain about the unauthenticated repository and so the
+# sources.list line will be left commented out
+#d-i apt-setup/local0/key string http://keyserver.ubuntu.com:11371/pks/lookup?fingerprint=on&op=index&search=0x6125E2A8C77F2818FB7BD15B93C4A3FD7BB9C367
+# Root password, either in clear text
+#d-i passwd/root-password password r00tme
+#d-i passwd/root-password-again password r00tme
+# or encrypted using an MD5 hash.
+# printf "cicciopasticcio" | mkpasswd -s -m md5
+d-i passwd/root-password-crypted password $1$R.X7GLIQ$mgrFVxIf3zz2HxNZIkIgz1
+# Enable shadow passwords.
+user-setup-udeb passwd/shadow boolean true
+# Allow root login.
+user-setup-udeb passwd/root-login boolean false
+# User parameters.
+d-i passwd/user-fullname string Administrator
+d-i passwd/username string innoteam
+# or encrypted using an MD5 hash.
+# printf "cicciopasticcio" | mkpasswd -s -m md5
+d-i passwd/user-password-crypted password $1$R.X7GLIQ$mgrFVxIf3zz2HxNZIkIgz1
+# Si vuole che le directory home siano leggibili da tutti?
+adduser	adduser/homedir-permission	boolean	true
+# Aggiungere l'utente ?
+base-passwd	base-passwd/user-add	boolean	true
+# for internal use only
+user-setup-udeb	passwd/user-default-groups	string	sudo adm cdrom dip lpadmin plugdev sambashare debian-tor libvirtd
+# for internal use only
+# Choices: lucid, precise, quantal, raring, saucy, trusty
+d-i	cdrom/suite	select	trusty
+# for internal use; can be preseeded
+network-preseed	preseed/url/checksum	string
+# Usare il software dal componente «universe»?
+apt-mirror-setup	apt-setup/universe	boolean	true
+d-i	apt-setup/universe	boolean	true
+# Choices: Albania, Andorra, Armenia, Austria, Azerbaigian, Bielorussia, Belgio, Bosnia-Erzegovina, Bulgaria, Croazia, Cipro, Repubblica Ceca, Danimarca, Estonia, Isole Fær Øer, Finlandia, Francia, Georgia, Germania, Gibilterra, Grecia, Groenlandia, Guernsey, Santa Sede (Stato della Città del Vaticano), Ungheria, Islanda, Irlanda, Isola di Man, Italia, Jersey, Lettonia, Liechtenstein, Lituania, Lussemburgo, Repubblica di Macedonia, Malta, Moldavia, Monaco, Montenegro, Paesi Bassi, Norvegia, Polonia, Portogallo, Romania, Russia, San Marino, Serbia, Slovacchia, Slovenia, Spagna, Svalbard e Jan Mayen, Svezia, Svizzera, Ucraina, Regno Unito, Isole Åland
+d-i	localechooser/countrylist/Europe	select	Rome
+# Tipo d'installazione:
+# Choices: normale, live
+live-installer	live-installer/mode	select	normal
+# for internal use; can be preseeded
+apt-setup-udeb	apt-setup/security_host	string	security.debian.org
+d-i	apt-setup/security_host	string	security.debian.org
+# Usare il software in contrib?
+apt-mirror-setup	apt-setup/contrib	boolean	false
+apt-mirror-setup	apt-setup/universe	boolean	true
+# for internal use; can be preseeded
+clock-setup	clock-setup/utc-auto	boolean	true
+d-i	clock-setup/utc-auto	boolean	true
+# for internal use; can be preseeded
+d-i	debian-installer/exit/poweroff	boolean	false
+# Nome host mirror dell'archivio Ubuntu:
+choose-mirror-bin	mirror/http/hostname	string	it.archive.ubuntu.com
+# for internal use only
+user-setup-udeb	user-setup/allow-password-weak	boolean	false
+# for internal use only
+d-i	debconf/language	string	it
+# for internal use; can be preseeded
+apt-mirror-setup	apt-setup/overlay_host	string	ppa.launchpad.net
+### Package selection
+#tasksel tasksel/first multiselect standard, web-server
+# If the desktop task is selected, install the kde and xfce desktops
+# instead of the default gnome desktop.
+tasksel tasksel/first multiselect standard, openssh-server
+# Individual additional packages to install
+d-i pkgsel/include string openssh-server build-essential vim tcpdump iproute2 vlan python-dev ipmitool software-properties-common
+# Come gestire gli aggiornamenti su questo sistema?
+# Choices: Nessun aggiornamento automatico, Installare automaticamente gli aggiornamenti di sicurezza, Gestire il sistema con Landscape
+pkgsel	pkgsel/update-policy select	unattended-upgrades
+# Whether to upgrade packages after debootstrap.
+# Allowed values: none, safe-upgrade, full-upgrade
+d-i pkgsel/upgrade select safe-upgrade
+
+d-i preseed/late_command string apt-install zsh; in-target chsh -s /bin/zsh; in-target chsh -s admin /bin/zsh; in-target apt-add-repository ppa:ansible/ansible; apt-install ansible
+popularity-contest popularity-contest/participate boolean false
+# Choices: american (American English), bokmål (Bokmål Norwegian), british (British English), catala (Catalan), 
+# danish (Den Store Danske Ordliste), italiano (Italian), nederlands (Dutch), nynorsk (New Norwegian), polish (Polish), 
+# svenska (Swedish), ukrainian (Ukrainian), български (Bulgarian), Impostazione manuale del collegamento simbolico
+dictionaries-common	dictionaries-common/default-wordlist	select	american (American English)
+# Choices: Nessun tasto «componi», Alt destro (AltGr), Ctrl destro, Tasto Windows destro, Tasto menù, Tasto Windows sinistro, Bloc Maiusc
+keyboard-configuration	keyboard-configuration/compose	select	No compose key
+# Mantenere l'attuale disposizione della tastiera nel file di configurazione?
+keyboard-configuration	keyboard-configuration/unsupported_config_layout	boolean	true
+# Mappa della tastiera da usare:
+# Choices: Inglese (Stati Uniti), Albanese, Arabo, Asturiano, Bangladesh, Bielorussa, Bengalese, 
+# Belga, Bosniaco, Brasiliana, Inglese (Gran Bretagna), Bulgara, Bulgara (layout fonetico), 
+# Francese (Canada), Canadese (multilingua), Catalano, Cinese, Croata, Ceca, Danese, Olandese, 
+# Dvorak, Dzongkha, Esperanto, Estone, Etiope, Finlandese, Francese, Georgiano, Tedesca, Greca, 
+# Gujarati, Gurmukhi, Ebraica, Hindi, Ungherese, Islandese, Irlandese, Italiana, Giapponese, 
+# Kannada, Kazako, Khmer, Chirghisa, Coreano, Curdo (layout F), Curdo (layout Q), Lao, 
+# Latino-americana, Lettone, Lituana, Macedone, Malayalam, Nepalese, Sami del Nord, Norvegese, 
+# Persiano, Polacca, Portoghese, Punjabi, Rumena, Russa, Serba (cirillica), Sindhi, Sinhala, 
+# Slovacca, Slovena, Spagnola, Svedese, Francese (Svizzera), Tedesca (Svizzera), Tagica, Tamil, 
+# Telugu, Tailandese, Tibetana, Turca (layout F), Turca (layout Q), Ucraina, Uyghur, Vietnamita
+keyboard-configuration	keyboard-configuration/xkb-keymap	select	Italiana
+# for internal use; can be preseeded
+man-db	man-db/auto-update	boolean	true
+# for internal use
+console-setup	console-setup/store_defaults_in_debconf_db	boolean	true
+# for internal use
+keyboard-configuration	keyboard-configuration/modelcode	string	pc105
+# Scaricare e installare automaticamente gli aggiornamenti?
+unattended-upgrades	unattended-upgrades/enable_auto_updates	boolean	true
+# Grub is the default boot loader (for x86). If you want lilo installed
+# instead, uncomment this:
+#d-i grub-installer/skip boolean true
+# To also skip installing lilo, and install no bootloader, uncomment this
+# too:
+#d-i lilo-installer/skip boolean true
+
+# Come gestire gli aggiornamenti su questo sistema?
+# Choices: Nessun aggiornamento automatico, Installare automaticamente gli aggiornamenti di sicurezza, Gestire il sistema con Landscape
+pkgsel	pkgsel/update-policy	select	unattended-upgrades
+
+# With a few exceptions for unusual partitioning setups, GRUB 2 is now the
+# default. If you need GRUB Legacy for some particular reason, then
+# uncomment this:
+#d-i grub-installer/grub2_instead_of_grub_legacy boolean false
+
+# This is fairly safe to set, it makes grub install automatically to the MBR
+# if no other operating system is detected on the machine.
+d-i grub-installer/only_debian boolean true
+
+# This one makes grub-installer install to the MBR if it also finds some other
+# OS, which is less safe as it might not be able to boot that other OS.
+d-i grub-installer/with_other_os boolean true
+
+# Installare il boot loader GRUB nel master boot record?
+d-i	grub-installer/with_other_os	boolean	true
+grub-installer	grub-installer/with_other_os	boolean	true
+
+# Alternatively, if you want to install to a location other than the mbr,
+# uncomment and edit these lines:
+#d-i grub-installer/only_debian boolean false
+#d-i grub-installer/with_other_os boolean false
+#d-i grub-installer/bootdev  string (hd0,0)
+# To install grub to multiple disks:
+#d-i grub-installer/bootdev  string (hd0,0) (hd1,0) (hd2,0)
+# To install to a particular device:
+#d-i grub-installer/bootdev  string /dev/sda
+
+# Optional password for grub, either in clear text
+#d-i grub-installer/password password r00tme
+#d-i grub-installer/password-again password r00tme
+# or encrypted using an MD5 hash, see grub-md5-crypt(8).
+#d-i grub-installer/password-crypted password [MD5 hash]
+
+# Use the following option to add additional boot parameters for the
+# installed system (if supported by the bootloader installer).
+# Note: options passed to the installer will be added automatically.
+#d-i debian-installer/add-kernel-opts string nousb
+
+# During installations from serial console, the regular virtual consoles
+# (VT1-VT6) are normally disabled in /etc/inittab. Uncomment the next
+# line to prevent this.
+d-i finish-install/keep-consoles boolean true
+
+# Avoid that last message about the install being complete.
+d-i finish-install/reboot_in_progress note
+
+# This will prevent the installer from ejecting the CD during the reboot,
+# which is useful in some situations.
+#d-i cdrom-detect/eject boolean false
+
+# This is how to make the installer shutdown when finished, but not
+# reboot into the installed system.
+#d-i debian-installer/exit/halt boolean true
+# This will power off the machine instead of just halting it.
+#d-i debian-installer/exit/poweroff boolean true
